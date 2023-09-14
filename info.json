@@ -1,0 +1,24 @@
+{
+    "whatsapp": {
+      "before_number": "https://api.whatsapp.com/send?phone=55",
+      "after_number": "&text="
+    },
+    "email": {
+      "address":"admin@sunlighteng.com.br"
+    },
+    "address": "R. Monte Castelo, Qd. 14, Lt. 01, Número 477, Jardim Planalto, Goiânia-GO",
+    "maps": {
+      "maps_address": "https://www.google.com/maps/place/Sun+Light+Engenharia+do+Sol+%7C+Goi%C3%A1s/@-16.7158198,-49.2982355,17z/data=!3m1!4b1!4m5!3m4!1s0x935ef73ff2ce2955:0x82ca3c9f7a2a2150!8m2!3d-16.71582!4d-49.2982358"
+    },
+    "CEP": "74333200",
+    "phones": {
+      "call_only": {
+        "0": "62996846756",
+        "1": "62985461885"
+      },
+      "whatsapp": {
+        "0": "6232897574",
+        "1": "62993023339"
+      }
+    }
+  }
