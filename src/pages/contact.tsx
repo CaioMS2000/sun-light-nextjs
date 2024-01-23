@@ -172,7 +172,7 @@ export default function Contact({
 											/>
 										</Text>
 									</Link>
-									<Link
+									{/* <Link
 										as={NextLink}
 										href={whatsAppLinks[1]}
 										target="_blank"
@@ -196,7 +196,7 @@ export default function Contact({
 												fontSize={"small"}
 											/>
 										</Text>
-									</Link>
+									</Link> */}
 								</VStack>
 							</HStack>
 						</Box>

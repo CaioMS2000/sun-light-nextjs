@@ -15,11 +15,15 @@ import {
 	useBreakpointValue,
 } from "@chakra-ui/react";
 import { TbSunset2 } from "react-icons/tb";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function SolarEnergy() {
-	function budgetRequest() {}
+	const {push} = useRouter()
+	function budgetRequest() {
+		push('/contato')
+	}
 
 	return (
 		<>
