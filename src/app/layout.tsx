@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
+import { Inter_Tight } from 'next/font/google'
+
 import './globals.css'
+
+const interTight = Inter_Tight({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Sun Light',
@@ -16,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={'dark antialiased'}>{children}</body>
+      <body className={`antialiased ${interTight.className} overflow-x-hidden`}>
+        {children}
+      </body>
     </html>
   )
 }

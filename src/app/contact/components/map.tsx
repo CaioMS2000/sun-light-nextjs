@@ -1,23 +1,5 @@
 'use client'
 import { z } from 'zod'
-
-const center = {
-  //   lat: -16.715799249062005,
-  //   lng: -49.2982311414151,
-  lat: -16.715799,
-  lng: -49.298231,
-}
-
-const googleMapsEnvSchema = z.object({
-  NEXT_PUBLIC_MAP_ID: z.string().min(1),
-  NEXT_PUBLIC_MAPS_API_KEY: z.string().min(1),
-})
-const envParse = googleMapsEnvSchema.safeParse({
-  NEXT_PUBLIC_MAP_ID: process.env.NEXT_PUBLIC_MAP_ID,
-  NEXT_PUBLIC_MAPS_API_KEY: process.env.NEXT_PUBLIC_MAPS_API_KEY,
-})
-const mapsAPIKey = envParse.data
-
 import {
   APIProvider,
   Map as MapComponent,
@@ -28,6 +10,22 @@ import {
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import type { Marker } from '@googlemaps/markerclusterer'
 import { useEffect, useState, useRef } from 'react'
+
+const center = {
+  //   lat: -16.715799249062005,
+  //   lng: -49.2982311414151,
+  lat: -16.715799,
+  lng: -49.298231,
+}
+const googleMapsEnvSchema = z.object({
+  NEXT_PUBLIC_MAP_ID: z.string().min(1),
+  NEXT_PUBLIC_MAPS_API_KEY: z.string().min(1),
+})
+const envParse = googleMapsEnvSchema.safeParse({
+  NEXT_PUBLIC_MAP_ID: process.env.NEXT_PUBLIC_MAP_ID,
+  NEXT_PUBLIC_MAPS_API_KEY: process.env.NEXT_PUBLIC_MAPS_API_KEY,
+})
+const mapsAPIKey = envParse.data
 
 export default function Intro() {
   if (!mapsAPIKey) {
@@ -42,7 +40,7 @@ export default function Intro() {
     )
   }
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={{ height: '100%', width: '100%' }}>
       <APIProvider apiKey={mapsAPIKey.NEXT_PUBLIC_MAPS_API_KEY}>
         <MapComponent
           center={{ ...center }}
