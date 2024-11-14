@@ -34,7 +34,9 @@ export default {
   			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				foreground: 'hsl(var(--accent-foreground))',
+				100: "#212529",
+				85: "#424649",
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
@@ -49,7 +51,13 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			"sun-light":{
+				yellow: "#FFCE00",
+				blue: "#23446B",
+        	},
+			"dark-grey": "#A6A6AB",
+			"light-grey": "#F4F4F4",
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
