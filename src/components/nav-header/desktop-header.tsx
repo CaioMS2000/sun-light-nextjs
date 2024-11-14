@@ -29,9 +29,13 @@ export default function DesktopNavHeader({
           <div className="grid grid-cols-[auto,1fr] gap-2">
             <Image
               src={'/images/logo_icon_alpha_sm.png'}
-              width={50}
-              height={50}
               alt=""
+              // width={50}
+              // height={50}
+              width="0"
+              height="0"
+              sizes="100px"
+              className="w-12 lg:w-16"
             />
             <div className="flex flex-col justify-center">
               <p className="font-semibold text-sun-light-blue">Sun Light</p>
