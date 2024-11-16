@@ -13,7 +13,7 @@ interface NavHeaderProps extends React.HTMLAttributes<HTMLElement> {
 export default function NavHeader(props: NavHeaderProps) {
   return (
     <>
-      <MobileNavHeader />
+      <MobileNavHeader {...props} />
       <DesktopNavHeader {...props} />
     </>
   )
