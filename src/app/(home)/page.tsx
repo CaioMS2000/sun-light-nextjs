@@ -18,7 +18,7 @@ export default function Home() {
       <HomeHeader />
       <div className="pl-10 md:pl-24">
         <h3 className="mt-28 mb-10 text-2xl">Áreas de atuação</h3>
-        <p className="mb-10 max-w-[750] text-wrap">
+        <p className="mb-10 max-w-[700px] text-wrap">
           Seja para projetos de pequena ou grande escala, estamos comprometidos
           em entregar resultados de ponta, contribuindo para um futuro
           energético mais sustentável e inovador.
