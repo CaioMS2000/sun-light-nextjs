@@ -44,10 +44,13 @@ export default function Home() {
         <div className='flex h-64 w-full items-end rounded-lg bg-[url("/images/services/ryan-ancill-0w1MiTY78h0-unsplash.jpg")] bg-cover pb-7 pl-7 text-lg text-white md:h-96'>
           Projetos de arquitetura
         </div>
-        <div className="flex h-64 w-full flex-col items-center justify-center gap-3 bg-accent-100 bg-cover font-bold text-lg text-white md:h-96">
+        <Link
+          href={'/projects'}
+          className="flex h-64 w-full flex-col items-center justify-center gap-3 bg-accent-100 bg-cover font-bold text-lg text-white md:h-96"
+        >
           <p className="">Nossos projetos</p>
           <ArrowRight />
-        </div>
+        </Link>
       </div>
       <div className="mt-10 flex w-full justify-start pl-2 md:mt-28 md:justify-end">
         <p className="max-w-80 text-xs md:max-w-3xl md:text-base">
