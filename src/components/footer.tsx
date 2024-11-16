@@ -1,10 +1,19 @@
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Footer() {
+interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
+
+export default function Footer({ className, ...props }: FooterProps) {
   return (
     <>
-      <div className="bg-accent-100 pt-16 pb-5 text-white md:grid md:grid-cols-4 md:items-start md:gap-y-10">
+      <div
+        {...props}
+        className={cn(
+          'bg-accent-100 pt-16 pb-5 text-white md:grid md:grid-cols-4 md:items-start md:gap-y-10',
+          className
+        )}
+      >
         <div className="flex flex-col gap-2 pl-10">
           <p>Páginas</p>
           <Link href={'/'}>Página inicial</Link>

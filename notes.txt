@@ -1,0 +1,13 @@
+Sobre as ISO no template:
+
+Essa imagem mostra selos relacionados à certificação ISO (International Organization for Standardization), uma organização que desenvolve padrões internacionais para assegurar a qualidade, segurança e eficiência de produtos, serviços e sistemas. 
+
+Os selos podem se referir a diferentes normas ISO, como:
+
+- **ISO 9001**: Gestão da qualidade.
+- **ISO 14001**: Gestão ambiental.
+- **ISO 27001**: Gestão de segurança da informação.
+
+A **ISO 45001** é uma norma internacional que especifica requisitos para um sistema de gestão de saúde e segurança ocupacional (SSO). O objetivo principal é proteger os trabalhadores, prevenir acidentes de trabalho, lesões e doenças ocupacionais, além de melhorar continuamente o desempenho relacionado à saúde e segurança no ambiente de trabalho.
+
+Essas certificações são usadas por empresas para demonstrar conformidade com padrões reconhecidos internacionalmente. O site em que você encontrou esses selos provavelmente os utiliza como prova de que segue esses padrões. Caso precise de informações mais específicas, posso te ajudar a detalhar os números das normas ou explicar a relevância delas.

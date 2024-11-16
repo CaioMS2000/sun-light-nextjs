@@ -97,35 +97,32 @@ export default function Home() {
           </CardFooter>
         </Card>
       </div>
-      <div className="mt-40 flex items-center justify-around md:mt-60">
-        <Card className="h-fit border-none bg-red-400 bg-transparent">
-          <CardHeader>
-            <CardTitle className="text-base">
-              Entre em contato conosco
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm">
-              Se você está pronto para explorar como nossa experiência em
-              energia solar pode beneficiar seus projetos, não hesite em nos
-              contatar. Estamos aqui para ouvir, colaborar e fornecer soluções
-              personalizadas que se alinhem com suas necessidades e objetivos
-              específicos.
-            </p>
-          </CardContent>
-          <CardFooter className="text-sm">
-            <Button type="button" variant={'outline'}>
-              <Link
-                href={'/contact'}
-                className="inline-flex items-center gap-3"
-              >
-                Entre em contato <ArrowRight size={20} />
-              </Link>
-            </Button>
-          </CardFooter>
-        </Card>
-      </div>
-      <Footer />
+
+      <Card className="mt-40 h-fit border-none bg-transparent shadow-transparent">
+        <CardHeader>
+          <CardTitle className="text-base md:text-xl">
+            Entre em contato conosco
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="max-w-[600px] text-sm">
+            Se você está pronto para explorar como nossa experiência em energia
+            solar pode beneficiar seus projetos, não hesite em nos contatar.
+            Estamos aqui para ouvir, colaborar e fornecer soluções
+            personalizadas que se alinhem com suas necessidades e objetivos
+            específicos.
+          </p>
+        </CardContent>
+        <CardFooter className="text-sm">
+          <Button type="button" variant={'outline'}>
+            <Link href={'/contact'} className="inline-flex items-center gap-3">
+              Entre em contato <ArrowRight size={20} />
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
+
+      <Footer className="mt-16" />
     </>
   )
 }
