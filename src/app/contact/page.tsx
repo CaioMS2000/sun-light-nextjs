@@ -1,6 +1,7 @@
 import MapComponent from '@/app/contact/components/map'
 import NavHeader from '@/components/nav-header'
 import FormSection from './components/form-section'
+import Footer from '@/components/footer'
 
 export default function Contact() {
   return (
@@ -23,6 +24,8 @@ export default function Contact() {
       <div className="mt-32 h-[500px] w-screen">
         <MapComponent />
       </div>
+
+      <Footer />
     </>
   )
 }
