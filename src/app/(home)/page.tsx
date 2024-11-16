@@ -4,19 +4,18 @@ import Image from 'next/image'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import Footer from '@/components/footer'
 
 export default function Home() {
   return (
     <>
       <HomeHeader />
-
       <div className="pl-10 md:pl-24">
         <h3 className="mt-28 mb-10 text-2xl">Áreas de atuação</h3>
         <p className="mb-10 max-w-[750] text-wrap">
@@ -50,7 +49,6 @@ export default function Home() {
           <ArrowRight />
         </div>
       </div>
-
       <div className="mt-10 flex w-full justify-start pl-2 md:mt-28 md:justify-end">
         <p className="max-w-80 text-xs md:max-w-3xl md:text-base">
           Somos especialistas em energia fotovoltaica. Com um compromisso
@@ -62,8 +60,7 @@ export default function Home() {
           da energia solar.{' '}
         </p>
       </div>
-
-      <div className="mt-40 flex items-center justify-around bg-light-grey md:mt-60">
+      <div className="mt-40 flex items-center justify-around bg-light-grey md:mt-60 md:px-5">
         <Image
           src={'/images/services/ryan-ancill-0w1MiTY78h0-unsplash.jpg'}
           alt=""
@@ -73,7 +70,7 @@ export default function Home() {
           className="-translate-y-10 hidden w-64 rounded-lg md:block xl:w-96"
         />
 
-        <Card className="h-fit border-none bg-red-400 bg-transparent">
+        <Card className="h-fit border-none bg-transparent shadow-transparent">
           <CardHeader>
             <CardTitle className="text-base">
               Conhecimento profundo na área
@@ -100,7 +97,6 @@ export default function Home() {
           </CardFooter>
         </Card>
       </div>
-
       <div className="mt-40 flex items-center justify-around md:mt-60">
         <Card className="h-fit border-none bg-red-400 bg-transparent">
           <CardHeader>
@@ -123,12 +119,13 @@ export default function Home() {
                 href={'/contact'}
                 className="inline-flex items-center gap-3"
               >
-                Contate-nos <ArrowRight size={20} />
+                Entre em contato <ArrowRight size={20} />
               </Link>
             </Button>
           </CardFooter>
         </Card>
       </div>
+      <Footer />
     </>
   )
 }
