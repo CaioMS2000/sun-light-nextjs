@@ -65,7 +65,7 @@ export default function Home() {
       </div>
       <div className="mt-40 flex items-center justify-around bg-light-grey md:mt-60 md:px-5">
         <Image
-          src={'/images/services/ryan-ancill-0w1MiTY78h0-unsplash.jpg'}
+          src={'/images/banners/raphael-cruz-IwY-27ceRCA-unsplash.jpg'}
           alt=""
           width="0"
           height="0"
