@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import Footer from '@/components/footer'
 
 export default function Home() {
   return (
@@ -101,7 +100,7 @@ export default function Home() {
         </Card>
       </div>
 
-      <Card className="mt-40 h-fit border-none bg-transparent shadow-transparent">
+      <Card className="mt-40 mb-16 h-fit border-none bg-transparent shadow-transparent">
         <CardHeader>
           <CardTitle className="text-base md:text-xl">
             Entre em contato conosco
@@ -124,8 +123,6 @@ export default function Home() {
           </Button>
         </CardFooter>
       </Card>
-
-      <Footer className="mt-16" />
     </>
   )
 }
