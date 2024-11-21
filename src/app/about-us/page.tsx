@@ -31,7 +31,7 @@ export default function AboutUs() {
             className="w-64 self-end rounded-lg md:w-[600px]"
           />
         </div>
-        <p className="flex flex-col space-y-4 text-xs">
+        <p className="flex flex-col space-y-4 text-xs md:text-lg">
           <span>
             A inovação tem estado no coração da nossa jornada desde o início. Na
             Sun Light, acreditamos que estar na vanguarda da tecnologia e
@@ -54,7 +54,7 @@ export default function AboutUs() {
           </div>
         </div>
 
-        <p className="flex flex-col space-y-4 text-xs">
+        <p className="flex flex-col space-y-4 text-xs md:text-lg">
           <span className="">
             A partir do ano de 2015, a empresa desenvolveu um foco em projetos
             ligados a energias sustentáveis, incluindo os de energia

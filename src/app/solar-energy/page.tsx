@@ -75,14 +75,14 @@ export default function SolarEnergy() {
   return (
     <>
       <HeaderComponent />
-      <div className='mx-auto my-10 w-3/4 overflow-hidden rounded-xl bg-[position:60%_50%] bg-[url("/images/banners/IMG_8711.jpg")] bg-cover'>
+      <div className='mx-auto my-10 w-3/4 overflow-hidden rounded-xl bg-[position:60%_50%] bg-[url("/images/banners/IMG_8711.jpg")] bg-cover md:bg-[position:60%_80%]'>
         <div className="space-y-10 bg-black/5 py-10 text-center text-white">
-          <p className=" bg-black/80 p-3 text-sun-light-yellow">
+          <p className=" bg-black/80 p-3 text-sun-light-yellow md:text-2xl">
             Deixe o sol trabalhar por você
           </p>
           <div className="flex flex-col items-center gap-5 bg-black/80 p-4">
-            <Sun className="text-sun-light-yellow" />
-            <p className="p">
+            <Sun className="text-sun-light-yellow md:size-14" />
+            <p className="md:text-xl">
               Te ajudamos a reduzir até 95% de sua conta de energia, ajudando a
               preservar o meio ambiente
             </p>
