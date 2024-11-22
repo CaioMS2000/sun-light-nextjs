@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter_Tight } from 'next/font/google'
 
 import './globals.css'
-import Footer from '@/components/footer'
 
 const interTight = Inter_Tight({ subsets: ['latin'] })
 
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased ${interTight.className} overflow-x-hidden`}>
         {children}
-        <Footer />
       </body>
     </html>
   )

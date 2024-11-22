@@ -1,4 +1,4 @@
-import MapComponent from '@/app/contact/components/map'
+import MapComponent from '@/app/(public)/contact/components/map'
 import NavHeader from '@/components/nav-header'
 import FormSection from './components/form-section'
 
