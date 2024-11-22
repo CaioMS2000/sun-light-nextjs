@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'node:fs'
-import path from 'node:path'
+import { randomUUID } from 'node:crypto'
 import multiparty from 'multiparty'
 import { Readable } from 'node:stream'
 import { IncomingMessage } from 'node:http'
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { env } from '@/env'
+
+const client = new S3Client({
+  endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  region: 'auto',
+  credentials: {
+    accessKeyId: env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY!,
+  },
+})
 
 export const config = {
   api: {
@@ -11,7 +22,6 @@ export const config = {
   },
 }
 
-// Converter um ReadableStream da Web API para um Node.js Readable
 const toNodeReadable = (
   readableStream: ReadableStream<Uint8Array>
 ): Readable => {
@@ -28,7 +38,6 @@ const toNodeReadable = (
   })
 }
 
-// Criar um objeto IncomingMessage compatível
 const toNodeRequest = (req: NextRequest): IncomingMessage => {
   const headers: Record<string, string> = {}
   req.headers.forEach((value, key) => {
@@ -56,27 +65,40 @@ const parseForm = (req: NextRequest): Promise<{ fields: any; files: any }> => {
 }
 
 export async function POST(req: NextRequest) {
-  return NextResponse.json({ error: 'This route is disabled' }, { status: 500 })
   try {
-    const { files } = await parseForm(req)
+    const { files: formFiles } = await parseForm(req)
+    const { files } = formFiles
 
-    if (!files || files.files?.length === 0) {
+    if (!files || files.length === 0) {
       return NextResponse.json({ error: 'No files uploaded' }, { status: 400 })
     }
 
-    const uploadDir = path.join(process.cwd(), 'uploads')
-    console.log(uploadDir)
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir)
+    const uploadResults = []
+
+    for (const file of files) {
+      const fileContent = fs.readFileSync(file.path)
+      const uniqueFilename = `${randomUUID()}-${file.originalFilename}`
+
+      const command = new PutObjectCommand({
+        Bucket: env.AWS_BUCKET_NAME!,
+        Key: uniqueFilename,
+        Body: fileContent,
+        ContentType: file.headers['content-type'],
+      })
+
+      await client.send(command)
+
+      uploadResults.push({
+        filename: uniqueFilename,
+        originalFilename: file.originalFilename,
+      })
     }
 
-    files.files.forEach((file: any) => {
-      const filePath = path.join(uploadDir, file.originalFilename)
-      fs.renameSync(file.path, filePath)
-    })
-
     return NextResponse.json(
-      { message: 'Files uploaded successfully' },
+      {
+        message: 'Upload concluído com sucesso',
+        files: uploadResults,
+      },
       { status: 200 }
     )
   } catch (error) {
