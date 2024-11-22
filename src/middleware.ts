@@ -7,12 +7,10 @@ export async function middleware(request: NextRequest) {
   const cookieStore = await cookies()
   const usernameCookie = cookieStore.get('@sunlight-admin:username')
 
-  // if (!usernameCookie && env.SECURITY_MIDDLEWARE_ENABLED)
-  //   return NextResponse.redirect(new URL('/', request.url))
-
-  //   return NextResponse.redirect(new URL('/home', request.url))
+  if (env.SECURITY_MIDDLEWARE_ENABLED === 'true')
+    if (!usernameCookie) return NextResponse.redirect(new URL('/', request.url))
 }
 
 export const config = {
-  matcher: '/',
+  matcher: ['/admin'],
 }
