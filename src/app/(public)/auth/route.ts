@@ -20,11 +20,19 @@ export async function POST(request: NextRequest) {
     }
 
     const { user } = await authenticate({ password, username })
+    console.log(user)
     const cookieStore = await cookies()
 
     cookieStore.set({
       name: '@sunlight-admin:username',
       value: username,
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: '/',
+    })
+
+    cookieStore.set({
+      name: '@sunlight-admin:name',
+      value: user.name,
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     })
