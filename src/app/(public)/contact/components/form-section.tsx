@@ -21,26 +21,20 @@ const formSchema = z.object({
 })
 type FormData = z.infer<typeof formSchema>
 
-const emailjsEnvSchema = z.object({
-  NEXT_PUBLIC_EMAIL_API_PUBLIC_KEY: z.string().min(1),
-  NEXT_PUBLIC_EMAIL_API_SERVICE_ID: z.string().min(1),
-  NEXT_PUBLIC_EMAIL_API_TEMPLATE_ID: z.string().min(1),
+const emailEnvSchema = z.object({
+  NEXT_PUBLIC_RESEND_API_KEY: z.string().min(1),
 })
-const envParse = emailjsEnvSchema.safeParse({
-  NEXT_PUBLIC_EMAIL_API_PUBLIC_KEY:
-    process.env.NEXT_PUBLIC_EMAIL_API_PUBLIC_KEY,
-  NEXT_PUBLIC_EMAIL_API_SERVICE_ID:
-    process.env.NEXT_PUBLIC_EMAIL_API_SERVICE_ID,
-  NEXT_PUBLIC_EMAIL_API_TEMPLATE_ID:
-    process.env.NEXT_PUBLIC_EMAIL_API_TEMPLATE_ID,
+const envParse = emailEnvSchema.safeParse({
+  NEXT_PUBLIC_RESEND_API_KEY: process.env.NEXT_PUBLIC_RESEND_API_KEY,
 })
-const emailjsKey = envParse.data
+const emailDeliveryKey = envParse.data
 
 export default function SectionForm() {
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -55,32 +49,27 @@ export default function SectionForm() {
   })
 
   async function handleSubmitFn(data: FormData) {
-    if (!emailjsKey) {
-      throw new Error('EmailJS keys not found')
+    if (!emailDeliveryKey) {
+      throw new Error('Email delivery key not found')
     }
 
-    // await new Promise(resolve => setTimeout(resolve, 1000 * 5))
-    console.log(data)
+    try {
+      const response = await fetch('/send-email', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          address: data.address,
+          phone: data.phone,
+          message: data.message,
+          phoneUsesWhatsapp: data.phoneUsesWhatsapp,
+        }),
+      })
 
-    const params: Record<string, any> = {}
-
-    params.from_name = data.name
-    params.email = data.email
-    params.message = `Dados do cliente:\nEndereço: ${data.address}\nTelefone: ${data.phone}\n`
-    params.message +=
-      data.phoneUsesWhatsapp === 'yes'
-        ? 'este número tambem usa Whatsapp\n'
-        : 'este número não usa Whatsapp\n'
-    params.message += `Mensagem: ${data.message}`
-
-    console.log(params)
-
-    // await emailjs.send(
-    //   emailjsKey.NEXT_PUBLIC_EMAIL_API_SERVICE_ID,
-    //   emailjsKey.NEXT_PUBLIC_EMAIL_API_TEMPLATE_ID,
-    //   params,
-    //   emailjsKey.NEXT_PUBLIC_EMAIL_API_PUBLIC_KEY,
-    // )
+      reset()
+    } catch (error) {
+      console.error(error)
+    }
   }
   useEffect(() => {
     console.log(errors)
