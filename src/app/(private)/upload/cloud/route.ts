@@ -66,8 +66,16 @@ const parseForm = (req: NextRequest): Promise<{ fields: any; files: any }> => {
 
 export async function POST(req: NextRequest) {
   try {
-    const { files: formFiles } = await parseForm(req)
+    const data = await parseForm(req)
+    const { files: formFiles, ...rest } = data
     const { files } = formFiles
+    console.log('\n\n\n\n\n')
+    console.log(Object.keys(data))
+    console.log(data)
+    console.log(formFiles)
+    console.log(files)
+    console.log(Object.keys(rest))
+    console.log(rest)
 
     if (!files || files.length === 0) {
       return NextResponse.json({ error: 'No files uploaded' }, { status: 400 })
@@ -79,14 +87,14 @@ export async function POST(req: NextRequest) {
       const fileContent = fs.readFileSync(file.path)
       const uniqueFilename = `${randomUUID()}-${file.originalFilename}`
 
-      const command = new PutObjectCommand({
-        Bucket: env.AWS_BUCKET_NAME!,
-        Key: uniqueFilename,
-        Body: fileContent,
-        ContentType: file.headers['content-type'],
-      })
+      // const command = new PutObjectCommand({
+      //   Bucket: env.AWS_BUCKET_NAME!,
+      //   Key: uniqueFilename,
+      //   Body: fileContent,
+      //   ContentType: file.headers['content-type'],
+      // })
 
-      await client.send(command)
+      // await client.send(command)
 
       uploadResults.push({
         filename: uniqueFilename,
