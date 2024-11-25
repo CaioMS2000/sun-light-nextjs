@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Projeto {
-  id          Int      @id @default(autoincrement())
-  displayName String   @map("display_name")
-  address     String
-  potency     Float
-  estimation  Float
-  pj          Boolean
-  imageURLs   String[] @default([]) @map("image_urls")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id         Int      @id @default(autoincrement())
+  name       String
+  address    String
+  potency    Float
+  estimation Float
+  pj         Boolean
+  imageURLs  String[] @default([]) @map("image_urls")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
   @@map("projetos")
 }
