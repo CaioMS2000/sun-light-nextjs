@@ -59,7 +59,7 @@ export function FileInput({ name, control, label, error }: FileInputProps) {
       </div>
 
       {errorMessage && (
-        <span style={{ color: 'red' }}>{errorMessage.toString()}</span>
+        <span className="text-red-500">{errorMessage.toString()}</span>
       )}
     </div>
   )
