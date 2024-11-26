@@ -29,7 +29,8 @@
 			},
 			"suspicious": {
 				"noExplicitAny": "off",
-				"noArrayIndexKey":"warn"
+				"noArrayIndexKey":"warn",
+				"noEmptyInterface":"warn"
 			},
 			"complexity":{
 				"noStaticOnlyClass": "off",
@@ -39,7 +40,8 @@
 			"a11y":{
 				"useValidAnchor":"warn",
 				"useButtonType":"off",
-				"noLabelWithoutControl": "warn"
+				"noLabelWithoutControl": "warn",
+				"useKeyWithClickEvents":"info"
 			},
 			"correctness":{
 				"useExhaustiveDependencies":"warn",

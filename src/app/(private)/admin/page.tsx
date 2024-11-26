@@ -1,11 +1,18 @@
 'use client'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import UploadForm from './component/uploadForm'
 import Image from 'next/image'
 import { SquareUser } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export default function Admin() {
-  const nameCookie = getCookie('@sunlight-admin:name')
+  const [adminName, setAdminName] = useState('')
+
+  useEffect(() => {
+    const nameCookie = getCookie('@sunlight-admin:name')
+
+    if (nameCookie) setAdminName(nameCookie)
+  }, [])
 
   return (
     <>
@@ -20,7 +27,7 @@ export default function Admin() {
         />
         <p className="inline-flex items-center gap-2 font-bold text-white text-xl">
           <SquareUser className="size-6" />
-          {/* {nameCookie} */}
+          <span>{adminName}</span>
         </p>
       </div>
       <UploadForm />

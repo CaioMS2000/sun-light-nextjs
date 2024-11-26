@@ -7,6 +7,7 @@ import { IncomingMessage } from 'node:http'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { env } from '@/env'
 import { prisma } from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 const client = new S3Client({
   endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
@@ -107,9 +108,6 @@ export async function POST(req: NextRequest) {
       imageURLs,
     }
 
-    console.log('preData')
-    console.log(preData)
-
     const newProject = await prisma.project.create({
       data: {
         address: preData.address,
@@ -121,8 +119,8 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    console.log('\n')
-    console.log(newProject)
+    revalidatePath('/projects')
+    console.log(uploadResults)
 
     return NextResponse.json(
       {

@@ -1,5 +1,6 @@
+'use client'
 import React from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
@@ -8,6 +9,7 @@ import FormError from '@/components/form-error'
 import { Label } from '@/components/ui/label'
 import FormField from './formField'
 import { Separator } from '@/components/ui/separator'
+import { FileInput } from './inputFile'
 
 const uploadSchema = z.object({
   files: z
@@ -51,14 +53,15 @@ function UploadForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(uploadSchema),
     defaultValues: {
-      name: '',
-      address: '',
-      potency: '',
-      estimation: '',
+      name: 'caio',
+      address: 'tghtrt',
+      potency: '2',
+      estimation: '3',
       pj: false,
     },
   })
@@ -66,7 +69,7 @@ function UploadForm() {
   const onSubmit: SubmitHandler<FormData> = async data => {
     const formData = new FormData()
 
-    data.files.forEach(file => {
+    Array.from(data.files).forEach(file => {
       formData.append('files', file)
     })
 
@@ -99,7 +102,7 @@ function UploadForm() {
         <p className="mb-5">
           <strong>Crie um novo projeto</strong>
         </p>
-        <div className="mb-1 inline-flex gap-3">
+        <div className="mb-1 flex flex-col gap-3 md:flex-row">
           <div className="space-y-4">
             <FormField>
               <Input
@@ -162,23 +165,12 @@ function UploadForm() {
             </div>
             {errors.pj && <FormError>{errors.pj.message}</FormError>}
           </FormField>
-          <FormField>
-            <Input
-              type="file"
-              multiple
-              {...register('files')}
-              className="w-auto"
-            />
-            {errors.files && (
-              <FormError>
-                {Array.isArray(errors.files)
-                  ? errors.files.map((error, index) => (
-                      <span key={index}>{error?.message}</span>
-                    ))
-                  : errors.files.message}
-              </FormError>
-            )}
-          </FormField>
+          <FileInput
+            name="files"
+            control={control}
+            label="Selecione seus arquivos"
+            error={errors.files as FieldError | undefined}
+          />
         </div>
 
         <Button type="submit" className="mt-10 bg-sun-light-blue">
