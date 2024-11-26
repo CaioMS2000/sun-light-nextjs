@@ -14,6 +14,9 @@ import { FileInput } from './inputFile'
 const uploadSchema = z.object({
   files: z
     .any()
+    .refine(files => files !== undefined && files !== null, {
+      message: 'Você deve enviar pelo menos um arquivo.',
+    })
     .refine(files => files instanceof FileList, {
       message: 'Arquivos inválidos',
     })
