@@ -77,7 +77,7 @@ function UploadForm() {
     formData.append('pj', data.pj.toString())
 
     try {
-      const response = await fetch('/upload/cloud', {
+      const response = await fetch('/create-project', {
         method: 'POST',
         body: formData,
       })
