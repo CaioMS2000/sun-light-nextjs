@@ -4,13 +4,13 @@ import { cookies } from 'next/headers'
 import { env } from './env'
 
 export async function middleware(request: NextRequest) {
-  const cookieStore = await cookies()
-  const usernameCookie = cookieStore.get('@sunlight-admin:username')
+	const cookieStore = await cookies()
+	const usernameCookie = cookieStore.get('@sunlight-admin:username')
 
-  if (env.SECURITY_MIDDLEWARE_ENABLED === 'true')
-    if (!usernameCookie) return NextResponse.redirect(new URL('/', request.url))
+	if (env.SECURITY_MIDDLEWARE_ENABLED === 'true')
+		if (!usernameCookie) return NextResponse.redirect(new URL('/', request.url))
 }
 
 export const config = {
-  matcher: ['/admin'],
+	matcher: ['/admin'],
 }

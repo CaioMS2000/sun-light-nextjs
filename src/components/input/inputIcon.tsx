@@ -1,7 +1,7 @@
 interface InputIconProps {
-  children: React.ReactNode
+	children: React.ReactNode
 }
 
 export function InputIcon({ children }: InputIconProps) {
-  return <>{children}</>
+	return <>{children}</>
 }

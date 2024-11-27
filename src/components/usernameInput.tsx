@@ -6,25 +6,25 @@ import { useState } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 interface UsernameInputProps {
-  hookFormReference: UseFormRegisterReturn
+	hookFormReference: UseFormRegisterReturn
 }
 
 export default function UsernameInput({
-  hookFormReference,
+	hookFormReference,
 }: UsernameInputProps) {
-  const [isFocused, setIsFocused] = useState(false)
+	const [isFocused, setIsFocused] = useState(false)
 
-  return (
-    <InputRoot className="p-2" isFocused={isFocused}>
-      <InputIcon>
-        <SquareUser size={40} className="text-sun-light-blue" />
-      </InputIcon>
-      <InputElement
-        className="font-bold text-lg text-white"
-        placeholder="Nome de usuário"
-        onIsFocused={setIsFocused}
-        {...hookFormReference}
-      />
-    </InputRoot>
-  )
+	return (
+		<InputRoot className="p-2" isFocused={isFocused}>
+			<InputIcon>
+				<SquareUser size={40} className="text-sun-light-blue" />
+			</InputIcon>
+			<InputElement
+				className="font-bold text-lg text-white"
+				placeholder="Nome de usuário"
+				onIsFocused={setIsFocused}
+				{...hookFormReference}
+			/>
+		</InputRoot>
+	)
 }

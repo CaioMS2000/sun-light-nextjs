@@ -8,21 +8,21 @@ import { cn } from '@/lib/utils'
 interface QuoteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const QuoteButton = ({ className, ...props }: QuoteButtonProps) => {
-  const router = useRouter()
+	const router = useRouter()
 
-  async function handleClick() {
-    await router.push('/contact')
-  }
+	async function handleClick() {
+		await router.push('/contact')
+	}
 
-  return (
-    <Button
-      className={cn('bg-white text-accent-100 hover:text-white', className)}
-      onClick={handleClick}
-      {...props}
-    >
-      Solicitar um orçamento
-    </Button>
-  )
+	return (
+		<Button
+			className={cn('bg-white text-accent-100 hover:text-white', className)}
+			onClick={handleClick}
+			{...props}
+		>
+			Solicitar um orçamento
+		</Button>
+	)
 }
 
 export default QuoteButton

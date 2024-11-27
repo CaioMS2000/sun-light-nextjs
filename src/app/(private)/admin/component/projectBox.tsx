@@ -1,4 +1,5 @@
 'use client'
+import Autoplay from 'embla-carousel-autoplay'
 import { ProcessedProject } from '@/@types/project'
 import {
 	Card,
@@ -15,6 +16,10 @@ import {
 	CarouselPrevious,
 } from '@/components/ui/carousel'
 import Image from 'next/image'
+import { type CarouselApi } from '@/components/ui/carousel'
+import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ProjectBoxProps extends ProcessedProject {}
 
@@ -27,23 +32,47 @@ export default function ProjectBox({
 	pj,
 	images,
 }: ProjectBoxProps) {
+	const [api, setApi] = useState<CarouselApi>()
+	const [current, setCurrent] = useState(0)
+	const [count, setCount] = useState(0)
+
+	useEffect(() => {
+		if (!api) {
+			return
+		}
+
+		setCount(api.scrollSnapList().length)
+		setCurrent(api.selectedScrollSnap() + 1)
+
+		api.on('select', () => {
+			setCurrent(api.selectedScrollSnap() + 1)
+		})
+	}, [api])
 	return (
 		<>
 			<Card className="mx-auto w-96 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1)] md:w-[700px] lg:w-[700px]">
 				<CardHeader>
-					<CardTitle>{name}</CardTitle>
+					<CardTitle id="CardTitle" className="flex justify-between px-5">
+						<span className="span">{name}</span>
+						<span className="span">{address}</span>
+					</CardTitle>
 				</CardHeader>
-				<CardContent>
-					<p>Endereço: {address}</p>
+				<CardContent className="flex justify-around px-5">
 					<p>Potência: {potency} kWp</p>
 					<p>Produção estimada: {estimation} kWh/mês</p>
 				</CardContent>
-				<CardFooter className="flex justify-center">
+				<CardFooter className="flex flex-col justify-center gap-3">
 					<Carousel
 						opts={{
 							align: 'start',
 							loop: true,
 						}}
+						plugins={[
+							Autoplay({
+								delay: 2000,
+							}),
+						]}
+						setApi={setApi}
 						className="w-full"
 					>
 						<CarouselContent className="-ml-2 md:-ml-4">
@@ -63,9 +92,23 @@ export default function ProjectBox({
 								)
 							})}
 						</CarouselContent>
-						<CarouselPrevious />
-						<CarouselNext />
 					</Carousel>
+					<div className="flex gap-5">
+						<Button
+							type="button"
+							onClick={() => api?.scrollTo(current - 1)}
+							className="bg-sun-light-blue"
+						>
+							<ChevronLeft />
+						</Button>
+						<Button
+							type="button"
+							onClick={() => api?.scrollTo(current + 1)}
+							className="bg-sun-light-blue"
+						>
+							<ChevronRight />
+						</Button>
+					</div>
 				</CardFooter>
 			</Card>
 		</>

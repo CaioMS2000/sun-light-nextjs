@@ -6,26 +6,26 @@ import { useState } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 interface PasswordInputProps {
-  hookFormReference: UseFormRegisterReturn
+	hookFormReference: UseFormRegisterReturn
 }
 
 export default function PasswordInput({
-  hookFormReference,
+	hookFormReference,
 }: PasswordInputProps) {
-  const [isFocused, setIsFocused] = useState(false)
+	const [isFocused, setIsFocused] = useState(false)
 
-  return (
-    <InputRoot className="p-2" isFocused={isFocused}>
-      <InputIcon>
-        <KeyRound size={40} className="text-sun-light-blue" />
-      </InputIcon>
-      <InputElement
-        type="password"
-        className="font-bold text-lg text-white"
-        placeholder="Senha"
-        onIsFocused={setIsFocused}
-        {...hookFormReference}
-      />
-    </InputRoot>
-  )
+	return (
+		<InputRoot className="p-2" isFocused={isFocused}>
+			<InputIcon>
+				<KeyRound size={40} className="text-sun-light-blue" />
+			</InputIcon>
+			<InputElement
+				type="password"
+				className="font-bold text-lg text-white"
+				placeholder="Senha"
+				onIsFocused={setIsFocused}
+				{...hookFormReference}
+			/>
+		</InputRoot>
+	)
 }
