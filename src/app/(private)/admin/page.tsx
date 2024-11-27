@@ -1,36 +1,17 @@
-'use client'
-import { getCookie } from 'cookies-next/client'
 import UploadForm from './component/uploadForm'
-import Image from 'next/image'
-import { SquareUser } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Separator } from '@/components/ui/separator'
+import ProjectsArea from './component/projectsArea'
+import Header from './header'
 
 export default function Admin() {
-  const [adminName, setAdminName] = useState('')
+	return (
+		<>
+			<Header />
+			<UploadForm />
+			<Separator />
+			<ProjectsArea />
 
-  useEffect(() => {
-    const nameCookie = getCookie('@sunlight-admin:name')
-
-    if (nameCookie) setAdminName(nameCookie)
-  }, [])
-
-  return (
-    <>
-      <div className="flex items-center justify-between bg-sun-light-blue p-4">
-        <Image
-          alt=""
-          src={'/images/logo_white.png'}
-          width="0"
-          height="0"
-          sizes="100vw"
-          className="h-20 w-auto rounded-lg"
-        />
-        <p className="inline-flex items-center gap-2 font-bold text-white text-xl">
-          <SquareUser className="size-6" />
-          <span>{adminName}</span>
-        </p>
-      </div>
-      <UploadForm />
-    </>
-  )
+			<div id="white-space" className="h-14 bg-transparent"></div>
+		</>
+	)
 }

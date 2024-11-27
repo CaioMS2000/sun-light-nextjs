@@ -4,8 +4,8 @@
 		"enabled": true
 	},
 	"formatter": {
-		"indentStyle": "space",
-		"indentWidth": 2,
+		"indentStyle": "tab",
+		"indentWidth": 1,
 		"lineWidth": 80
 	},
 	"javascript": {
