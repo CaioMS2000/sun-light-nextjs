@@ -52,14 +52,18 @@ export default function ProjectBox({
 		<>
 			<Card className="mx-auto w-96 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1)] md:w-[700px] lg:w-[700px]">
 				<CardHeader>
-					<CardTitle id="CardTitle" className="flex justify-between px-5">
+					<CardTitle className="flex flex-col text-sm md:text-lg">
 						<span className="span">{name}</span>
 						<span className="span">{address}</span>
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="flex justify-around px-5">
-					<p>Potência: {potency} kWp</p>
-					<p>Produção estimada: {estimation} kWh/mês</p>
+				<CardContent className="flex flex-col px-5 md:flex-row md:gap-28">
+					<p>
+						<strong>Potência:</strong> {potency} kWp
+					</p>
+					<p>
+						<strong>Produção estimada:</strong> {estimation} kWh/mês
+					</p>
 				</CardContent>
 				<CardFooter className="flex flex-col justify-center gap-3">
 					<Carousel
@@ -86,7 +90,7 @@ export default function ProjectBox({
 											width="0"
 											height="0"
 											sizes="500px"
-											className="h-20 w-auto rounded-lg"
+											className=" w-auto rounded-lg"
 										/>
 									</CarouselItem>
 								)
