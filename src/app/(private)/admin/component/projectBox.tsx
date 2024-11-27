@@ -19,7 +19,14 @@ import Image from 'next/image'
 import { type CarouselApi } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+	BatteryCharging,
+	ChartNoAxesCombined,
+	ChevronLeft,
+	ChevronRight,
+	CircleUser,
+	MapPinHouse,
+} from 'lucide-react'
 
 interface ProjectBoxProps extends ProcessedProject {}
 
@@ -53,16 +60,28 @@ export default function ProjectBox({
 			<Card className="mx-auto w-96 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1)] md:w-[700px] lg:w-[700px]">
 				<CardHeader>
 					<CardTitle className="flex flex-col text-sm md:text-lg">
-						<span className="span">{name}</span>
-						<span className="span">{address}</span>
+						<span className="inline-flex items-center gap-3">
+							<CircleUser />
+							{name}
+						</span>
+						<span className="inline-flex items-center gap-3">
+							<MapPinHouse />
+							{address}
+						</span>
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="flex flex-col px-5 md:flex-row md:gap-28">
-					<p>
-						<strong>Potência:</strong> {potency} kWp
+					<p className="inline-flex items-center gap-3">
+						<BatteryCharging />
+						<span>
+							<strong>Potência:</strong> {potency} kWp
+						</span>
 					</p>
-					<p>
-						<strong>Produção estimada:</strong> {estimation} kWh/mês
+					<p className="inline-flex items-center gap-3">
+						<ChartNoAxesCombined />
+						<span>
+							<strong>Produção estimada:</strong> {estimation} kWh/mês
+						</span>
 					</p>
 				</CardContent>
 				<CardFooter className="flex flex-col justify-center gap-3">
