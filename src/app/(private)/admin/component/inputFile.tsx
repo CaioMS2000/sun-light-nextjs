@@ -26,14 +26,20 @@ export function FileInput({ name, control, label, error }: FileInputProps) {
 				: null
 
 	return (
-		<div>
-			<div className="div">
+		<div className="w-fit">
+			<div>
 				<Controller
 					name={name}
 					control={control}
 					render={({ field: { onChange, ref, value } }) => (
 						<div
 							onClick={() => document.getElementById(name)?.click()}
+							onKeyDown={e => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.preventDefault() // Evita scroll ao pressionar 'Space'
+									document.getElementById(name)?.click()
+								}
+							}}
 							className="flex cursor-pointer items-center gap-2"
 						>
 							<input
