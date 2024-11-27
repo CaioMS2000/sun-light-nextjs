@@ -57,10 +57,10 @@ function UploadForm() {
 	} = useForm<FormData>({
 		resolver: zodResolver(uploadSchema),
 		defaultValues: {
-			name: 'caio',
-			address: 'tghtrt',
-			potency: '2',
-			estimation: '3',
+			name: '',
+			address: '',
+			potency: '',
+			estimation: '',
 			pj: false,
 		},
 	})
