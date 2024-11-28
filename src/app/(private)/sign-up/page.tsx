@@ -47,7 +47,7 @@ function SignIn() {
 
 	async function handleRegister(data: UserFormData) {
 		try {
-			const response = await fetch('/register', {
+			const response = await fetch('/system/register', {
 				method: 'POST',
 				body: JSON.stringify({
 					password: data.password,

@@ -55,7 +55,7 @@ export default function SectionForm() {
 		}
 
 		try {
-			const response = await fetch('/send-email', {
+			const response = await fetch('/system/send-email', {
 				method: 'POST',
 				body: JSON.stringify({
 					name: data.name,

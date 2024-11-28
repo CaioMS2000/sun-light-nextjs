@@ -48,7 +48,7 @@ function SignIn() {
 
 	async function handleLogin(data: UserFormData) {
 		try {
-			const response = await fetch('/auth', {
+			const response = await fetch('/system/auth', {
 				method: 'POST',
 				body: JSON.stringify({
 					password: data.password,
@@ -75,10 +75,6 @@ function SignIn() {
 			setValue('username', username)
 		}
 	}, [username, setValue])
-
-	useEffect(() => {
-		console.log(isSubmitting)
-	}, [isSubmitting])
 
 	return (
 		<>

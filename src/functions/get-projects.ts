@@ -6,6 +6,9 @@ export async function getProjects(page: number) {
 	const projects = await prisma.project.findMany({
 		take: AMOUNT_PER_REQUEST,
 		skip: (page - 1) * AMOUNT_PER_REQUEST,
+		orderBy: {
+			createdAt: 'desc',
+		},
 	})
 
 	return { projects, meta: { page, perPage: AMOUNT_PER_REQUEST, totalCount } }

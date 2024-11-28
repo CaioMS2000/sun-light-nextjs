@@ -11,6 +11,9 @@ import FormField from '@/components/formField'
 import { FileInput } from './input-file'
 import { BookmarkPlus, LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
+import { queryClient } from '@/lib/react-query'
+import { ProjectsQueryCache } from '@/@types/project'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 const uploadSchema = z.object({
 	files: z
@@ -65,6 +68,18 @@ function UploadForm() {
 			pj: false,
 		},
 	})
+	const {
+		mutateAsync,
+		mutate,
+		data: imageData,
+	} = useMutation({
+		mutationFn: async (imgURL: string) => {
+			const response = await fetch(`/system/get-image/${imgURL}`)
+			const result = await response.json()
+
+			return result
+		},
+	})
 
 	const onSubmit: SubmitHandler<FormData> = async data => {
 		const formData = new FormData()
@@ -80,7 +95,7 @@ function UploadForm() {
 		formData.append('pj', data.pj.toString())
 
 		try {
-			const response = await fetch('/create-project', {
+			const response = await fetch('/system/create-project', {
 				method: 'POST',
 				body: formData,
 			})
@@ -90,6 +105,35 @@ function UploadForm() {
 			}
 
 			const result = await response.json()
+
+			queryClient.setQueryData(
+				['projects', 1],
+				(cache: ProjectsQueryCache | undefined) => {
+					if (!cache) {
+						return cache
+					}
+
+					const projectsWithoutLast = cache.projects.slice(0, -1)
+					const data = {
+						projects: [
+							{
+								id: result.project.id,
+								name: result.project.name,
+								address: result.project.address,
+								potency: result.project.potency,
+								estimation: result.project.estimation,
+								pj: result.project.pj,
+								images: result.images,
+							},
+							...projectsWithoutLast,
+						],
+						meta: cache.meta,
+					}
+
+					return data
+					// return cache
+				}
+			)
 		} catch (error) {
 			console.error('Erro no upload:', error)
 		}

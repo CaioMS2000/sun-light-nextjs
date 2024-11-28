@@ -16,3 +16,12 @@ export type ProcessedProject = Omit<
 > & {
 	images: string[]
 }
+
+export type ProjectsQueryCache = {
+	projects: ProcessedProject[]
+	meta: {
+		page: number
+		perPage: number
+		totalCount: number
+	}
+}

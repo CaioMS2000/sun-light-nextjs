@@ -14,10 +14,11 @@ export default function ProjectsArea() {
 	const params = new URLSearchParams(searchParams.toString())
 	const pathname = usePathname()
 	const pageIndex = z.coerce.number().parse(searchParams.get('page') ?? 1)
-	const { data, isLoading } = useQuery({
+	const { data: projectData, isLoading } = useQuery({
 		queryKey: ['projects', pageIndex],
 		queryFn: async () => {
-			const response = await fetch(`get-projects/?page=${pageIndex}`)
+			console.log('fetching projects with key', pageIndex)
+			const response = await fetch(`/system/get-projects/?page=${pageIndex}`)
 			const result = await response.json()
 
 			return result
@@ -37,15 +38,15 @@ export default function ProjectsArea() {
 				Projetos
 			</h3>
 			<div className="flex flex-col gap-6">
-				{data && (
+				{projectData && (
 					<>
-						{data.projects.map((project: ProcessedProject) => (
+						{projectData.projects.map((project: ProcessedProject) => (
 							<ProjectBox key={project.id} {...project} />
 						))}
 						<Pagination
 							pageIndex={pageIndex}
-							totalPages={data.meta.totalCount}
-							perPage={data.meta.perPage}
+							totalPages={projectData.meta.totalCount}
+							perPage={projectData.meta.perPage}
 							onPageChange={handlePaginate}
 						/>
 					</>
