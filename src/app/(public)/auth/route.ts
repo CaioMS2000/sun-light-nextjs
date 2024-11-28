@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { cookies } from 'next/headers'
 import { authenticate } from '@/functions/authenticate'
+import { NAME_COOKIE, USERNAME_COOKIE } from '@/constants/cookies'
 
 const bodySchema = z.object({
 	password: z.string(),
@@ -24,14 +25,14 @@ export async function POST(request: NextRequest) {
 		const cookieStore = await cookies()
 
 		cookieStore.set({
-			name: '@sunlight-admin:username',
+			name: USERNAME_COOKIE,
 			value: username,
 			maxAge: 60 * 60 * 24 * 7, // 7 days
 			path: '/',
 		})
 
 		cookieStore.set({
-			name: '@sunlight-admin:name',
+			name: NAME_COOKIE,
 			value: user.name,
 			maxAge: 60 * 60 * 24 * 7, // 7 days
 			path: '/',

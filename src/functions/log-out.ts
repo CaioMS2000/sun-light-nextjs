@@ -1,6 +1,7 @@
+import { NAME_COOKIE, USERNAME_COOKIE } from '@/constants/cookies'
 import { deleteCookie } from 'cookies-next/client'
 
 export async function logoutUser() {
-	deleteCookie('@sunlight-admin:username')
-	deleteCookie('@sunlight-admin:name')
+	deleteCookie(USERNAME_COOKIE)
+	deleteCookie(NAME_COOKIE)
 }

@@ -1,11 +1,12 @@
+import { AMOUNT_PER_REQUEST } from '@/constants/database'
 import { prisma } from '@/lib/prisma'
 
 export async function getProjects(page: number) {
 	const totalCount = await prisma.project.count()
 	const projects = await prisma.project.findMany({
-		take: 10,
-		skip: (page - 1) * 10,
+		take: AMOUNT_PER_REQUEST,
+		skip: (page - 1) * AMOUNT_PER_REQUEST,
 	})
 
-	return { projects, meta: { page, perPage: 10, totalCount } }
+	return { projects, meta: { page, perPage: AMOUNT_PER_REQUEST, totalCount } }
 }

@@ -4,12 +4,13 @@ import Image from 'next/image'
 import { SquareUser } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { NAME_COOKIE } from '@/constants/cookies'
 
 export default function Header() {
 	const [adminName, setAdminName] = useState('')
 
 	useEffect(() => {
-		const nameCookie = getCookie('@sunlight-admin:name')
+		const nameCookie = getCookie(NAME_COOKIE)
 
 		if (nameCookie) setAdminName(nameCookie)
 	}, [])
