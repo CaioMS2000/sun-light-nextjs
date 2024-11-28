@@ -5,7 +5,6 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Textarea } from '@/components/ui/textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import FormError from '@/components/form-error'
@@ -71,9 +70,6 @@ export default function SectionForm() {
 			console.error(error)
 		}
 	}
-	useEffect(() => {
-		console.log(errors)
-	}, [errors])
 
 	return (
 		<>
