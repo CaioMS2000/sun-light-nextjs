@@ -4,19 +4,11 @@ import { randomUUID } from 'node:crypto'
 import multiparty from 'multiparty'
 import { Readable } from 'node:stream'
 import { IncomingMessage } from 'node:http'
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { env } from '@/env'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
-
-const client = new S3Client({
-	endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-	region: 'auto',
-	credentials: {
-		accessKeyId: env.AWS_ACCESS_KEY_ID!,
-		secretAccessKey: env.AWS_SECRET_ACCESS_KEY!,
-	},
-})
+import { awsClient } from '@/lib/aws'
 
 export const config = {
 	api: {
@@ -90,7 +82,7 @@ export async function POST(req: NextRequest) {
 				ContentType: file.headers['content-type'],
 			})
 
-			await client.send(command)
+			await awsClient.send(command)
 
 			uploadResults.push({
 				filename: uniqueFilename,
@@ -126,6 +118,7 @@ export async function POST(req: NextRequest) {
 			{
 				message: 'Upload concluído com sucesso',
 				files: uploadResults,
+				project: newProject,
 			},
 			{ status: 200 }
 		)

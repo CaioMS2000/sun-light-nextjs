@@ -1,30 +1,11 @@
 import { getProjects } from '@/functions/get-projects'
 import { NextRequest, NextResponse } from 'next/server'
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { env } from '@/env'
 import { Readable } from 'node:stream'
 import { ProcessedProject } from '@/@types/project'
-
-const client = new S3Client({
-	endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-	region: 'auto',
-	credentials: {
-		accessKeyId: env.AWS_ACCESS_KEY_ID!,
-		secretAccessKey: env.AWS_SECRET_ACCESS_KEY!,
-	},
-})
-
-// Função para converter um Readable (Node.js) em uma string base64 já formatada
-async function getBase64ImageFromS3(body: Readable, mimeType: string) {
-	const chunks: Buffer[] = []
-
-	for await (const chunk of body) {
-		chunks.push(Buffer.from(chunk))
-	}
-
-	const buffer = Buffer.concat(chunks)
-	return `data:${mimeType};base64,${buffer.toString('base64')}`
-}
+import { awsClient } from '@/lib/aws'
+import { getBase64ImageFromS3 } from '@/lib/aws/utils'
 
 export async function GET(req: NextRequest) {
 	try {
@@ -46,7 +27,7 @@ export async function GET(req: NextRequest) {
 					Bucket: env.AWS_BUCKET_NAME,
 					Key: imageURL,
 				})
-				const response = await client.send(command)
+				const response = await awsClient.send(command)
 
 				if (!response.Body) {
 					return NextResponse.json({ error: 'File not found' }, { status: 404 })
