@@ -1,7 +1,7 @@
 import UploadForm from './components/uploadForm'
 import { Separator } from '@/components/ui/separator'
 import ProjectsArea from '@/components/projectsArea'
-import Header from './header'
+import Header from './components/header'
 import { Suspense } from 'react'
 import LoadingComponent from './loading'
 import LogoutSection from './components/logoutSection'
