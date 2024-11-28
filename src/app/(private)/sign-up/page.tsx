@@ -9,8 +9,8 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import UsernameInput from '@/components/usernameInput'
-import PasswordInput from '@/components/passwordInput'
+import UsernameInput from '@/components/username-input'
+import PasswordInput from '@/components/password-input'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'

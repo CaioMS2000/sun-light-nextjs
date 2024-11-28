@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import FormError from '@/components/form-error'
 import { Label } from '@/components/ui/label'
 import FormField from '@/components/formField'
-import { FileInput } from './inputFile'
+import { FileInput } from './input-file'
 import { BookmarkPlus } from 'lucide-react'
 
 const uploadSchema = z.object({

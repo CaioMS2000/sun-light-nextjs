@@ -11,7 +11,7 @@ import {
 	Wrench,
 } from 'lucide-react'
 import HeaderComponent from './components/header'
-import { SEAreaImage } from './components/SEAreaImage'
+import { SEAreaImage } from './components/SE-area-image'
 import QuoteButton from './components/quote-butto'
 
 const advantages = [

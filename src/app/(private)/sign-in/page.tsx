@@ -19,8 +19,8 @@ import ptBR from 'dayjs/locale/pt-br'
 import utc from 'dayjs/plugin/utc'
 import { toast } from 'sonner'
 import Link from 'next/link'
-import UsernameInput from '@/components/usernameInput'
-import PasswordInput from '@/components/passwordInput'
+import UsernameInput from '@/components/username-input'
+import PasswordInput from '@/components/password-input'
 
 dayjs.extend(utc)
 dayjs.locale(ptBR)

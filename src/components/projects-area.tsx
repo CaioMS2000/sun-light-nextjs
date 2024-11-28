@@ -1,11 +1,11 @@
 'use client'
 import { ProcessedProject } from '@/@types/project'
-import ProjectBox from './projectBox'
+import ProjectBox from './project-box'
 import { Hotel } from 'lucide-react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { z } from 'zod'
 import { useQuery } from '@tanstack/react-query'
-import LoadingComponent from './loadingComponent'
+import LoadingComponent from './loading-component'
 import { Pagination } from './pagination'
 
 export default function ProjectsArea() {
