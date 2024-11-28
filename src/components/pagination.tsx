@@ -21,7 +21,7 @@ export function Pagination({
 }: PaginationsProps) {
 	const pages = Math.ceil(totalPages / perPage) || 1
 	const isFirstPage = pageIndex === 1
-	const isLastPage = pageIndex === pages - 1
+	const isLastPage = pageIndex === pages
 
 	return (
 		<>
