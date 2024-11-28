@@ -1,3 +1,4 @@
+'use client'
 import { KeyPressProvider } from '@/context/keyPressContext'
 import { queryClient } from '@/lib/react-query'
 import { QueryClientProvider } from '@tanstack/react-query'
