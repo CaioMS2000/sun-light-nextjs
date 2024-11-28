@@ -69,13 +69,6 @@ export async function POST(req: NextRequest) {
 		const data = await parseForm(req)
 		const { files: formFiles, ...rest } = data
 		const { files } = formFiles
-		console.log('\n\n\n\n\n')
-		console.log(Object.keys(data))
-		console.log(data)
-		console.log(formFiles)
-		console.log(files)
-		console.log(Object.keys(rest))
-		console.log(rest)
 
 		if (!files || files.length === 0) {
 			return NextResponse.json({ error: 'No files uploaded' }, { status: 400 })

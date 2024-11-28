@@ -89,7 +89,6 @@ function UploadForm() {
 			}
 
 			const result = await response.json()
-			console.log('Upload bem-sucedido:', result)
 		} catch (error) {
 			console.error('Erro no upload:', error)
 		}

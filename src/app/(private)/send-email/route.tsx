@@ -35,13 +35,8 @@ export async function POST(request: NextRequest) {
 		})
 
 		if (error) {
-			console.log('\n\n')
-			console.error(error)
-			console.log('\n\n')
 			return NextResponse.json({ error: 'Envio de email falhou' }, { status: 500 })
 		}
-
-		console.log(data)
 
 		return NextResponse.json(
 			{

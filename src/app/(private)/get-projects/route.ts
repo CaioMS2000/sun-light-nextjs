@@ -29,7 +29,6 @@ async function getBase64ImageFromS3(body: Readable, mimeType: string) {
 export async function GET(req: NextRequest) {
 	try {
 		const urlObject = new URL(req.url)
-		console.log(urlObject)
 		const { searchParams } = urlObject
 		const page = searchParams.get('page')
 

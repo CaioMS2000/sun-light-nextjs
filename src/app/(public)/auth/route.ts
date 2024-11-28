@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
 		}
 
 		const { user } = await authenticate({ password, username })
-		console.log(user)
 		const cookieStore = await cookies()
 
 		cookieStore.set({
