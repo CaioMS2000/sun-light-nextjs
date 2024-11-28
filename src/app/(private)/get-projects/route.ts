@@ -28,7 +28,16 @@ async function getBase64ImageFromS3(body: Readable, mimeType: string) {
 
 export async function GET(req: NextRequest) {
 	try {
-		const allProjects = await getProjects()
+		const urlObject = new URL(req.url)
+		console.log(urlObject)
+		const { searchParams } = urlObject
+		const page = searchParams.get('page')
+
+		if (!page) {
+			return NextResponse.json({ error: 'Page not provided' }, { status: 404 })
+		}
+
+		const { projects: allProjects, meta } = await getProjects(+page)
 		const processedProjects: ProcessedProject[] = []
 
 		for (const project of allProjects) {
@@ -75,6 +84,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json(
 			{
 				projects: processedProjects,
+				meta,
 			},
 			{ status: 200 }
 		)
