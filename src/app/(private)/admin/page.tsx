@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import ProjectsArea from './component/projectsArea'
 import Header from './header'
 import { Suspense } from 'react'
+import LoadingComponent from './loading'
 
 export default function Admin() {
 	return (
@@ -10,7 +11,7 @@ export default function Admin() {
 			<Header />
 			<UploadForm />
 			<Separator />
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<LoadingComponent />}>
 				<ProjectsArea />
 			</Suspense>
 

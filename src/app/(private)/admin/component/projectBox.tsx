@@ -25,6 +25,7 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	CircleUser,
+	ImageIcon,
 	MapPinHouse,
 } from 'lucide-react'
 
@@ -70,7 +71,7 @@ export default function ProjectBox({
 						</span>
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="flex flex-col px-5 md:flex-row md:gap-28">
+				<CardContent className="flex flex-col px-5 md:flex-row md:gap-14">
 					<p className="inline-flex items-center gap-3">
 						<BatteryCharging />
 						<span>
@@ -81,6 +82,12 @@ export default function ProjectBox({
 						<ChartNoAxesCombined />
 						<span>
 							<strong>Produção estimada:</strong> {estimation} kWh/mês
+						</span>
+					</p>
+					<p className="inline-flex items-center gap-3">
+						<ImageIcon />
+						<span>
+							<strong>{count}</strong>
 						</span>
 					</p>
 				</CardContent>
@@ -98,11 +105,11 @@ export default function ProjectBox({
 						setApi={setApi}
 						className="w-full"
 					>
-						<CarouselContent className="-ml-2 md:-ml-4">
+						<CarouselContent>
 							{images.map((image, i) => {
 								const key = `image-${i}`
 								return (
-									<CarouselItem key={key} className="w-fit basis-auto pl-1">
+									<CarouselItem key={key} className="">
 										<Image
 											alt=""
 											src={image}
@@ -116,21 +123,26 @@ export default function ProjectBox({
 							})}
 						</CarouselContent>
 					</Carousel>
-					<div className="flex gap-5">
-						<Button
-							type="button"
-							onClick={() => api?.scrollTo(current - 1)}
-							className="bg-sun-light-blue"
-						>
-							<ChevronLeft />
-						</Button>
-						<Button
-							type="button"
-							onClick={() => api?.scrollTo(current + 1)}
-							className="bg-sun-light-blue"
-						>
-							<ChevronRight />
-						</Button>
+					<div className="flex flex-col items-center justify-between gap-5">
+						<p className="text-center">
+							{current} de {count}
+						</p>
+						<div className="flex gap-5">
+							<Button
+								type="button"
+								onClick={() => api?.scrollTo(current - 1)}
+								className="bg-sun-light-blue"
+							>
+								<ChevronLeft />
+							</Button>
+							<Button
+								type="button"
+								onClick={() => api?.scrollTo(current + 1)}
+								className="bg-sun-light-blue"
+							>
+								<ChevronRight />
+							</Button>
+						</div>
 					</div>
 				</CardFooter>
 			</Card>
