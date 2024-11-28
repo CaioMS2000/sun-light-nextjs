@@ -15,13 +15,14 @@ export default function ProjectsArea() {
 	const pathname = usePathname()
 	const pageIndex = z.coerce.number().parse(searchParams.get('page') ?? 1)
 	const { data, isLoading } = useQuery({
-		queryKey: ['orders', pageIndex],
+		queryKey: ['projects', pageIndex],
 		queryFn: async () => {
 			const response = await fetch(`get-projects/?page=${pageIndex}`)
 			const result = await response.json()
 
 			return result
 		},
+		staleTime: 1000 * 60 * 60 * 24,
 	})
 
 	function handlePaginate(page: number) {
@@ -49,7 +50,7 @@ export default function ProjectsArea() {
 						/>
 					</>
 				)}
-				{!data && <LoadingComponent />}
+				{isLoading && <LoadingComponent />}
 			</div>
 		</>
 	)
