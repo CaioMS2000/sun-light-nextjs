@@ -68,6 +68,12 @@ function SignIn() {
 
 	return (
 		<>
+			<Link
+				href={'/'}
+				className="absolute top-3 left-3 font-bold text-white hover:text-sun-light-yellow"
+			>
+				Página inicial
+			</Link>
 			<div className="mx-auto flex h-screen w-screen max-w-[1500px] items-center justify-center bg-zinc-900 font-catamaran text-lg">
 				<Card className="w-64 border-transparent bg-zinc-800 md:w-96">
 					<CardHeader>

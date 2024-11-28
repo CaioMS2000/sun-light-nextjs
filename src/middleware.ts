@@ -8,7 +8,10 @@ export async function middleware(request: NextRequest) {
 	const usernameCookie = cookieStore.get('@sunlight-admin:username')
 
 	if (env.SECURITY_MIDDLEWARE_ENABLED === 'true')
-		if (!usernameCookie) return NextResponse.redirect(new URL('/', request.url))
+		if (!usernameCookie)
+			return NextResponse.redirect(new URL('/sign-in', request.url), {
+				status: 303,
+			})
 }
 
 export const config = {
