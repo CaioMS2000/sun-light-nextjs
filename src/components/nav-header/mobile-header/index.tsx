@@ -71,6 +71,9 @@ export default function MobileNavHeader({
 						<Link className="underline underline-offset-2" href={'/contact'}>
 							Contato
 						</Link>
+						<Link className="underline underline-offset-2" href={'/admin'}>
+							Administrador
+						</Link>
 					</div>
 				)}
 			</nav>

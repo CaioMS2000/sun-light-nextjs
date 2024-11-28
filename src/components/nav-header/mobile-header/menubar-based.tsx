@@ -87,6 +87,14 @@ export default function MobileNavHeader2({
 										Contato
 									</Link>
 								</MenubarItem>
+								<MenubarItem>
+									<Link
+										className="text-zinc-400 underline underline-offset-2"
+										href={'/admin'}
+									>
+										Administrador
+									</Link>
+								</MenubarItem>
 							</MenubarContent>
 						</MenubarMenu>
 					</Menubar>
