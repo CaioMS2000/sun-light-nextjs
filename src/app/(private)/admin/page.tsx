@@ -13,7 +13,9 @@ export default function Admin() {
 			<LogoutSection />
 			<UploadForm />
 			<Separator />
-			<Suspense fallback={<LoadingComponent />}>{/* <ProjectsArea /> */}</Suspense>
+			<Suspense fallback={<LoadingComponent />}>
+				<ProjectsArea />
+			</Suspense>
 			<div id="white-space" className="h-14 bg-transparent"></div>
 		</>
 	)
