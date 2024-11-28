@@ -39,11 +39,11 @@ export default function SectionForm() {
 	} = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: 'text name',
-			email: 'email@email.com',
-			address: 'address 1',
-			phone: '99999999999',
-			message: 'test message',
+			name: '',
+			email: '',
+			address: '',
+			phone: '',
+			message: '',
 			phoneUsesWhatsapp: 'yes',
 		},
 	})
