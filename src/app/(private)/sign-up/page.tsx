@@ -22,6 +22,7 @@ import utc from 'dayjs/plugin/utc'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import NameInput from '@/components/nameInput'
+import { LoaderCircle } from 'lucide-react'
 
 dayjs.extend(utc)
 dayjs.locale(ptBR)
@@ -36,7 +37,11 @@ type UserFormData = z.infer<typeof userFormSchema>
 
 function SignIn() {
 	const router = useRouter()
-	const { register, handleSubmit, setValue, reset } = useForm<UserFormData>({
+	const {
+		register,
+		handleSubmit,
+		formState: { isSubmitting },
+	} = useForm<UserFormData>({
 		resolver: zodResolver(userFormSchema),
 	})
 
@@ -109,8 +114,15 @@ function SignIn() {
 								className="bg-sun-light-blue hover:bg-sun-light-blue-dark"
 								type="button"
 								onClick={handleSubmit(handleRegister)}
+								disabled={isSubmitting}
 							>
-								<strong>Registrar</strong>
+								{!isSubmitting && <strong>Registrar</strong>}
+								{isSubmitting && (
+									<span className="inline-flex items-center gap-2">
+										<LoaderCircle className="animate-spin cursor-not-allowed" />
+										<strong>Registrar</strong>
+									</span>
+								)}
 							</Button>
 						</CardFooter>
 					</form>

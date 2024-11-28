@@ -21,6 +21,7 @@ import { toast } from 'sonner'
 import Link from 'next/link'
 import UsernameInput from '@/components/username-input'
 import PasswordInput from '@/components/password-input'
+import { LoaderCircle } from 'lucide-react'
 
 dayjs.extend(utc)
 dayjs.locale(ptBR)
@@ -36,7 +37,12 @@ function SignIn() {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const username = searchParams.get('username')
-	const { register, handleSubmit, setValue, reset } = useForm<UserFormData>({
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		formState: { isSubmitting },
+	} = useForm<UserFormData>({
 		resolver: zodResolver(userFormSchema),
 	})
 
@@ -69,6 +75,10 @@ function SignIn() {
 			setValue('username', username)
 		}
 	}, [username, setValue])
+
+	useEffect(() => {
+		console.log(isSubmitting)
+	}, [isSubmitting])
 
 	return (
 		<>
@@ -113,8 +123,15 @@ function SignIn() {
 								className="bg-sun-light-blue hover:bg-sun-light-blue-dark"
 								type="button"
 								onClick={handleSubmit(handleLogin)}
+								disabled={isSubmitting}
 							>
-								<strong>Entrar</strong>
+								{!isSubmitting && <strong>Entrar</strong>}
+								{isSubmitting && (
+									<span className="inline-flex items-center gap-2">
+										<LoaderCircle className="animate-spin cursor-not-allowed" />
+										<strong>Entrar</strong>
+									</span>
+								)}
 							</Button>
 						</CardFooter>
 					</form>

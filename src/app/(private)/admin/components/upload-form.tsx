@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm, SubmitHandler, FieldError } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,7 +9,8 @@ import FormError from '@/components/form-error'
 import { Label } from '@/components/ui/label'
 import FormField from '@/components/formField'
 import { FileInput } from './input-file'
-import { BookmarkPlus } from 'lucide-react'
+import { BookmarkPlus, LoaderCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 const uploadSchema = z.object({
 	files: z
@@ -53,7 +54,7 @@ function UploadForm() {
 		register,
 		handleSubmit,
 		control,
-		formState: { errors },
+		formState: { errors, isSubmitting, isSubmitSuccessful },
 	} = useForm<FormData>({
 		resolver: zodResolver(uploadSchema),
 		defaultValues: {
@@ -93,6 +94,12 @@ function UploadForm() {
 			console.error('Erro no upload:', error)
 		}
 	}
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			toast.success('Projeto criado')
+		}
+	}, [isSubmitSuccessful])
 
 	return (
 		<>
@@ -162,8 +169,18 @@ function UploadForm() {
 					/>
 				</div>
 
-				<Button type="submit" className="mt-10 bg-sun-light-blue">
-					Criar novo projeto
+				<Button
+					type="submit"
+					className="mt-10 bg-sun-light-blue"
+					disabled={isSubmitting}
+				>
+					{!isSubmitting && <span>Criar novo projeto</span>}
+					{isSubmitting && (
+						<span className="inline-flex items-center gap-2">
+							<LoaderCircle className="animate-spin cursor-not-allowed" />
+							<span>Criar novo projeto</span>
+						</span>
+					)}
 				</Button>
 			</form>
 		</>

@@ -9,6 +9,8 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import FormError from '@/components/form-error'
 import FormField from '@/components/formField'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Nome é obrigatório' }),
@@ -34,7 +36,7 @@ export default function SectionForm() {
 		control,
 		handleSubmit,
 		reset,
-		formState: { errors, isSubmitting },
+		formState: { errors, isSubmitting, isSubmitSuccessful },
 	} = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -70,6 +72,12 @@ export default function SectionForm() {
 			console.error(error)
 		}
 	}
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			toast.success('Email enviado')
+		}
+	}, [isSubmitSuccessful])
 
 	return (
 		<>
