@@ -17,7 +17,6 @@ export default function ProjectsArea() {
 	const { data: projectData, isLoading } = useQuery({
 		queryKey: ['projects', pageIndex],
 		queryFn: async () => {
-			console.log('fetching projects with key', pageIndex)
 			const response = await fetch(`/system/get-projects/?page=${pageIndex}`)
 			const result = await response.json()
 

@@ -69,7 +69,7 @@ export default function SectionForm() {
 
 			reset()
 		} catch (error) {
-			console.error(error)
+			toast.error('Falha ao enviar o email')
 		}
 	}
 

@@ -69,7 +69,6 @@ export async function GET(req: NextRequest) {
 			{ status: 200 }
 		)
 	} catch (error) {
-		console.error(error)
 		return NextResponse.json({ error: 'Some error occurred' }, { status: 500 })
 	}
 }

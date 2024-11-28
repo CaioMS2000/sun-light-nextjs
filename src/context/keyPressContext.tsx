@@ -65,10 +65,6 @@ export const KeyPressProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}, [wordMatched, router])
 
-	useEffect(() => {
-		console.log(sequence)
-	}, [sequence])
-
 	return (
 		<KeyPressContext.Provider value={{ sequence }}>
 			{children}

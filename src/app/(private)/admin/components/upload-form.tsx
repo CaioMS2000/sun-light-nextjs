@@ -135,7 +135,7 @@ function UploadForm() {
 				}
 			)
 		} catch (error) {
-			console.error('Erro no upload:', error)
+			toast.error(`Erro no upload: ${error}`)
 		}
 	}
 
