@@ -1,5 +1,4 @@
 'use client'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -9,14 +8,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import emailjs from '@emailjs/browser'
+import FormError from '@/components/form-error'
+import FormField from '@/components/formField'
 
 const formSchema = z.object({
-	name: z.string(),
-	email: z.string().email(),
-	address: z.string(),
-	phone: z.string(),
-	message: z.string(),
+	name: z.string().min(1, { message: 'Nome é obrigatório' }),
+	email: z.string().email({ message: 'Email inválido' }),
+	address: z.string().min(1, { message: 'Endereço é obrigatório' }),
+	phone: z.string().min(1, { message: 'Telefone é obrigatório' }),
+	message: z.string().min(1, { message: 'Mensagem é obrigatória' }),
 	phoneUsesWhatsapp: z.enum(['yes', 'no']),
 })
 type FormData = z.infer<typeof formSchema>
@@ -103,27 +103,39 @@ export default function SectionForm() {
 							onSubmit={handleSubmit(handleSubmitFn)}
 						>
 							<fieldset className="flex flex-col gap-3 md:grid md:grid-cols-2">
-								<Input
-									{...register('name')}
-									placeholder="Nome completo"
-									className="placeholder:text-muted-foreground/50"
-								/>
-								<Input
-									{...register('email')}
-									placeholder="Seu email"
-									className="placeholder:text-muted-foreground/50"
-								/>
-								<Input
-									{...register('address')}
-									placeholder="Endereço"
-									className="placeholder:text-muted-foreground/50"
-								/>
-								<fieldset>
+								<FormField>
 									<Input
-										{...register('phone')}
-										placeholder="Celular"
+										{...register('name')}
+										placeholder="Nome completo"
 										className="placeholder:text-muted-foreground/50"
 									/>
+									{errors.name && <FormError>{errors.name.message}</FormError>}
+								</FormField>
+								<FormField>
+									<Input
+										{...register('email')}
+										placeholder="Seu email"
+										className="placeholder:text-muted-foreground/50"
+									/>
+									{errors.email && <FormError>{errors.email.message}</FormError>}
+								</FormField>
+								<FormField>
+									<Input
+										{...register('address')}
+										placeholder="Endereço"
+										className="placeholder:text-muted-foreground/50"
+									/>
+									{errors.address && <FormError>{errors.address.message}</FormError>}
+								</FormField>
+								<fieldset>
+									<FormField>
+										<Input
+											{...register('phone')}
+											placeholder="Celular"
+											className="placeholder:text-muted-foreground/50"
+										/>
+										{errors.phone && <FormError>{errors.phone.message}</FormError>}
+									</FormField>
 									<Controller
 										control={control}
 										name="phoneUsesWhatsapp"

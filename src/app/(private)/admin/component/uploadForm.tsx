@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import FormError from '@/components/form-error'
 import { Label } from '@/components/ui/label'
-import FormField from './formField'
+import FormField from '@/components/formField'
 import { FileInput } from './inputFile'
 import { BookmarkPlus } from 'lucide-react'
 
