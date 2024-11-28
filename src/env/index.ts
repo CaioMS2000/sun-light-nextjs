@@ -5,6 +5,7 @@ export const envSchema = z.object({
 	NEXT_PUBLIC_EMAIL_API_PUBLIC_KEY: z.string(),
 	NEXT_PUBLIC_EMAIL_API_SERVICE_ID: z.string(),
 	NEXT_PUBLIC_EMAIL_API_TEMPLATE_ID: z.string(),
+	NEXT_PUBLIC_USER_RESTRICTIONS: z.string(),
 	AWS_ACCESS_KEY_ID: z.string(),
 	AWS_SECRET_ACCESS_KEY: z.string(),
 	AWS_BUCKET_NAME: z.string(),
