@@ -77,14 +77,9 @@ export async function POST(req: NextRequest) {
 
 		const uploadResults = []
 		const imageURLs: string[] = []
-		const images: string[] = []
 
 		for (const file of files) {
 			const fileContent = fs.readFileSync(file.path)
-			const base64String = fileContent.toString('base64')
-			const ext = path.extname(String(file.path).toLocaleLowerCase())
-			const mimeType = mimeTypes[ext]
-			const base64StringComplete = `data:${mimeType};base64,${base64String}`
 			const uniqueFilename = `${randomUUID()}-${file.originalFilename}`
 
 			const command = new PutObjectCommand({
@@ -101,7 +96,6 @@ export async function POST(req: NextRequest) {
 				originalFilename: file.originalFilename,
 			})
 			imageURLs.push(uniqueFilename)
-			images.push(base64StringComplete)
 		}
 
 		const preData = {
@@ -132,7 +126,6 @@ export async function POST(req: NextRequest) {
 				message: 'Upload concluído com sucesso',
 				files: uploadResults,
 				project: newProject,
-				images,
 			},
 			{ status: 200 }
 		)

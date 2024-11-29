@@ -123,7 +123,7 @@ function UploadForm() {
 								potency: result.project.potency,
 								estimation: result.project.estimation,
 								pj: result.project.pj,
-								images: result.images,
+								imageURLs: result.project.imageURLs,
 							},
 							...projectsWithoutLast,
 						],
