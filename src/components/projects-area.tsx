@@ -1,5 +1,5 @@
 'use client'
-import { ProcessedProject } from '@/@types/project'
+import { Project } from '@/@types/project'
 import ProjectBox from './project-box'
 import { Hotel } from 'lucide-react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
@@ -39,7 +39,7 @@ export default function ProjectsArea() {
 			<div className="flex flex-col gap-6">
 				{projectData && (
 					<>
-						{projectData.projects.map((project: ProcessedProject) => (
+						{projectData.projects.map((project: Project) => (
 							<ProjectBox key={project.id} {...project} />
 						))}
 						<Pagination

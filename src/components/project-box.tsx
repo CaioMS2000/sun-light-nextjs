@@ -1,6 +1,6 @@
 'use client'
 import Autoplay from 'embla-carousel-autoplay'
-import { ProcessedProject } from '@/@types/project'
+import { Project } from '@/@types/project'
 import {
 	Card,
 	CardContent,
@@ -12,10 +12,7 @@ import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
 } from '@/components/ui/carousel'
-import Image from 'next/image'
 import { type CarouselApi } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -28,8 +25,10 @@ import {
 	ImageIcon,
 	MapPinHouse,
 } from 'lucide-react'
+import { SUBDOMAINBUCKETURL } from '@/constants/cloud'
+import ImageComponent from './image-component'
 
-interface ProjectBoxProps extends ProcessedProject {}
+interface ProjectBoxProps extends Project {}
 
 export default function ProjectBox({
 	id,
@@ -38,7 +37,7 @@ export default function ProjectBox({
 	potency,
 	estimation,
 	pj,
-	images,
+	imageURLs,
 }: ProjectBoxProps) {
 	const [api, setApi] = useState<CarouselApi>()
 	const [current, setCurrent] = useState(0)
@@ -106,13 +105,13 @@ export default function ProjectBox({
 						className="w-full"
 					>
 						<CarouselContent>
-							{images.map((image, i) => {
+							{imageURLs.map((url, i) => {
 								const key = `image-${i}`
 								return (
-									<CarouselItem key={key} className="">
-										<Image
+									<CarouselItem key={key} className="flex justify-center">
+										<ImageComponent
 											alt=""
-											src={image}
+											src={`${SUBDOMAINBUCKETURL}/${url}`}
 											width="0"
 											height="0"
 											sizes="500px"

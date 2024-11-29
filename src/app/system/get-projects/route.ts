@@ -1,11 +1,5 @@
 import { getProjects } from '@/functions/get-projects'
 import { NextRequest, NextResponse } from 'next/server'
-import { GetObjectCommand } from '@aws-sdk/client-s3'
-import { env } from '@/env'
-import { Readable } from 'node:stream'
-import { ProcessedProject } from '@/@types/project'
-import { awsClient } from '@/lib/aws'
-import { getBase64ImageFromS3 } from '@/lib/aws/utils'
 
 export async function GET(req: NextRequest) {
 	try {
@@ -17,53 +11,11 @@ export async function GET(req: NextRequest) {
 			return NextResponse.json({ error: 'Page not provided' }, { status: 404 })
 		}
 
-		const { projects: allProjects, meta } = await getProjects(+page)
-		const processedProjects: ProcessedProject[] = []
-
-		for (const project of allProjects) {
-			const base64Images = []
-			for (const imageURL of project.imageURLs) {
-				const command = new GetObjectCommand({
-					Bucket: env.AWS_BUCKET_NAME,
-					Key: imageURL,
-				})
-				const response = await awsClient.send(command)
-
-				if (!response.Body) {
-					return NextResponse.json({ error: 'File not found' }, { status: 404 })
-				}
-
-				const mimeType = response.ContentType
-
-				if (!mimeType) {
-					return NextResponse.json(
-						{ error: 'Content type not found' },
-						{ status: 404 }
-					)
-				}
-
-				const base64Image = await getBase64ImageFromS3(
-					response.Body as Readable,
-					mimeType
-				)
-
-				base64Images.push(base64Image)
-			}
-
-			processedProjects.push({
-				id: project.id,
-				name: project.name,
-				address: project.address,
-				potency: project.potency,
-				estimation: project.estimation,
-				pj: project.pj,
-				images: base64Images,
-			})
-		}
+		const { projects, meta } = await getProjects(+page)
 
 		return NextResponse.json(
 			{
-				projects: processedProjects,
+				projects,
 				meta,
 			},
 			{ status: 200 }

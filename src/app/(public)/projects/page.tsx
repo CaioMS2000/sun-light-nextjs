@@ -9,6 +9,7 @@ export default function Projects() {
 			<Suspense>
 				<ProjectsArea />
 			</Suspense>
+			<div id="white-space" className="h-5 bg-transparent"></div>
 		</>
 	)
 }
