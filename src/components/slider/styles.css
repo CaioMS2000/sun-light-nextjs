@@ -1,0 +1,17 @@
+.swiper-button-prev {
+	width: 0;
+	height: 0;
+}
+
+.swiper-button-prev::after {
+	content: "";
+}
+
+.swiper-button-next {
+	width: 0;
+	height: 0;
+}
+
+.swiper-button-next::after {
+	content: "";
+}
