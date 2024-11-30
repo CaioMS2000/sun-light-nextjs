@@ -1,4 +1,5 @@
 import Footer from '@/components/footer'
+import WhatsAppButton from '@/components/whats-app-button'
 
 export default function Layout({
 	children,
@@ -8,6 +9,7 @@ export default function Layout({
 	return (
 		<>
 			{children}
+			<WhatsAppButton />
 			<Footer />
 		</>
 	)

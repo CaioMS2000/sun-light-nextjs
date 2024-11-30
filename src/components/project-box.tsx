@@ -36,20 +36,20 @@ export default function ProjectBox({
 						{address}
 					</span>
 				</div>
-				<div className="my-3 flex justify-between">
-					<p className="inline-flex items-center gap-3">
+				<div className="my-3 grid grid-cols-1 gap-3 md:grid-cols-3 md:place-items-center">
+					<p className="inline-flex items-center gap-3 md:justify-center">
 						<BatteryCharging />
 						<span>
 							<strong>Potência:</strong> {potency} kWp
 						</span>
 					</p>
-					<p className="inline-flex items-center gap-3">
+					<p className="inline-flex items-center gap-3 md:justify-center">
 						<ChartNoAxesCombined />
 						<span>
 							<strong>Produção estimada:</strong> {estimation} kWh/mês
 						</span>
 					</p>
-					<p className="inline-flex items-center gap-3">
+					<p className="inline-flex items-center gap-3 md:justify-center">
 						<ImageIcon />
 						<span>
 							<strong>{imageURLs.length}</strong>

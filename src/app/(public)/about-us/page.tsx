@@ -1,22 +1,11 @@
 import NavHeader from '@/components/nav-header'
 import Image from 'next/image'
+import HeaderComponent from './components/header'
 
 export default function AboutUs() {
 	return (
 		<>
-			<div className="bg-light-grey">
-				<NavHeader />
-				<div className="flex h-[200px] items-end md:h-[400px]">
-					<div className="w-96 pb-5 pl-6 md:w-[600px] md:pb-12 md:pl-24">
-						<h1 className="mb-12 text-3xl md:text-6xl">Sobre nós</h1>
-						<p className="text-sm">
-							Saiba mais sobre a Sun Light e nosso compromisso com a excelência,
-							inovação e sustentabilidade.
-						</p>
-					</div>
-				</div>
-			</div>
-
+			<HeaderComponent />
 			<div className="mt-10 mb-10 flex flex-col gap-10 px-5">
 				<div className="flex max-w-[800px] flex-col gap-10">
 					<h4 className="text-base md:text-3xl">
