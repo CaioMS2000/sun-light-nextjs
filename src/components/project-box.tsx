@@ -93,12 +93,12 @@ export default function ProjectBox({
 				<CardFooter className="flex flex-col justify-center gap-3">
 					<Carousel
 						opts={{
-							align: 'start',
+							align: 'center',
 							loop: true,
 						}}
 						plugins={[
 							Autoplay({
-								delay: 2000,
+								delay: 1000 * 5,
 							}),
 						]}
 						setApi={setApi}
