@@ -29,7 +29,7 @@ export default function DesktopHomeHeader() {
 						</Button>
 					</div>
 				</div>
-				<div className='flex h-full w-5/12 items-end bg-[url("/images/banners/IMG_8447.png")] bg-cover'></div>
+				<div className='flex h-full w-[60%] items-end bg-[url("/images/banners/IMG_8447.png")] bg-cover'></div>
 			</header>
 		</>
 	)
