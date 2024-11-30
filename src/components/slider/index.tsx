@@ -14,6 +14,7 @@ interface SliderProps {
 	settings?: SwiperProps
 	children: ReactNode
 	sliderId?: string
+	log?: boolean
 }
 
 const defaultSettings: SwiperProps = {
@@ -32,6 +33,7 @@ export default function Slider({
 	settings,
 	children,
 	sliderId = 'slider-1',
+	log = false,
 }: SliderProps) {
 	const [activeIndex, setActiveIndex] = useState(1)
 	const activeSettings = settings ?? defaultSettings
@@ -39,9 +41,10 @@ export default function Slider({
 	let totalSlides = 1
 
 	if (Array.isArray(children)) {
-		content = children.map((child, index) => (
-			<SwiperSlide key={index}>{child}</SwiperSlide>
-		))
+		content = children.map((child, index) => {
+			const key = `${sliderId}-${index}`
+			return <SwiperSlide key={key}>{child}</SwiperSlide>
+		})
 		totalSlides = children.length
 	} else {
 		content = <SwiperSlide>{children}</SwiperSlide>
@@ -82,27 +85,28 @@ export default function Slider({
 
 	return (
 		<>
-			<div className="mx-auto my-10 ">
+			<div className="mb-5">
 				<Swiper
 					id={sliderId}
 					modules={[Navigation, Pagination, A11y, Autoplay]}
-					className="flex justify-center"
 					onSlideChange={e => {
-						console.clear()
-						console.log(e.activeIndex)
+						if (log) {
+							console.clear()
+							console.log(e.activeIndex)
+						}
 					}}
 					{...activeSettings}
 				>
 					{content}
 				</Swiper>
-				<div className="mt-5 flex justify-center gap-10">
-					<Button type="button" onClick={handleClickLeft}>
-						<ChevronLeft className="h-10 w-10" />
-					</Button>
-					<Button type="button" onClick={handleClickRight}>
-						<ChevronRight className="h-10 w-10" />
-					</Button>
-				</div>
+			</div>
+			<div className="flex justify-center gap-10">
+				<Button type="button" onClick={handleClickLeft}>
+					<ChevronLeft className="h-10 w-10" />
+				</Button>
+				<Button type="button" onClick={handleClickRight}>
+					<ChevronRight className="h-10 w-10" />
+				</Button>
 			</div>
 		</>
 	)

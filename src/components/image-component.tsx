@@ -9,7 +9,7 @@ const ImageComponent = ({ className, ...props }: ImageProps) => {
 	return (
 		<>
 			<Skeleton
-				className={cn('h-10 w-28 bg-accent-85/20', { hidden: isLoaded })}
+				className={cn('h-96 w-96 bg-accent-85/20', className, { hidden: isLoaded })}
 			/>
 			<Image
 				{...props}
