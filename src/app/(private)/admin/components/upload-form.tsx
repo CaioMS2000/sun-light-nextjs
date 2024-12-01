@@ -68,18 +68,6 @@ function UploadForm() {
 			pj: false,
 		},
 	})
-	const {
-		mutateAsync,
-		mutate,
-		data: imageData,
-	} = useMutation({
-		mutationFn: async (imgURL: string) => {
-			const response = await fetch(`/system/get-image/${imgURL}`)
-			const result = await response.json()
-
-			return result
-		},
-	})
 
 	const onSubmit: SubmitHandler<FormData> = async data => {
 		const formData = new FormData()
