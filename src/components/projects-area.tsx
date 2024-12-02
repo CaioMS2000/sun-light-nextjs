@@ -12,11 +12,9 @@ import {
 	SelectContent,
 	SelectGroup,
 	SelectItem,
-	SelectSeparator,
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { Button } from './ui/button'
 
 interface ProjectsAreaProps {
 	isAdmin?: boolean
@@ -28,6 +26,7 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 	const params = new URLSearchParams(searchParams.toString())
 	const pathname = usePathname()
 	const pageIndex = z.coerce.number().parse(searchParams.get('page') ?? 1)
+	const urlOrderState = searchParams.get('order')
 
 	params.set('page', `${pageIndex}`)
 
@@ -35,7 +34,14 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 		.enum(['pot-desc', 'pot-asc', 'est-desc', 'est-asc'])
 		.optional()
 		.nullable()
-		.parse(searchParams.get('order'))
+		.transform(val => val || 'pot-desc')
+		.parse(urlOrderState)
+
+	if (!urlOrderState) {
+		params.set('order', order)
+		router.push(`${pathname}?${params.toString()}`)
+	}
+
 	const { data: projectData, isLoading } = useQuery({
 		queryKey: ['projects', pageIndex, order],
 		queryFn: async () => {
@@ -102,18 +108,6 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 								</div>
 							</SelectItem>
 						</SelectGroup>
-						<SelectSeparator />
-						<Button
-							className="w-full px-2"
-							variant="secondary"
-							size="sm"
-							onClick={e => {
-								e.stopPropagation()
-								handleSelectFilter(null)
-							}}
-						>
-							Sem filtro
-						</Button>
 					</SelectContent>
 				</Select>
 			</div>
