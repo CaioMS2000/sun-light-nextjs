@@ -28,6 +28,9 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 	const params = new URLSearchParams(searchParams.toString())
 	const pathname = usePathname()
 	const pageIndex = z.coerce.number().parse(searchParams.get('page') ?? 1)
+
+	params.set('page', `${pageIndex}`)
+
 	const order = z
 		.enum(['pot-desc', 'pot-asc', 'est-desc', 'est-asc'])
 		.optional()
