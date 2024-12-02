@@ -88,7 +88,7 @@ export default function Home() {
 					</CardContent>
 					<CardFooter className="text-sm">
 						<Button type="button" variant={'outline'}>
-							<Link href={'/about'} className="inline-flex items-center gap-3">
+							<Link href={'/about-us'} className="inline-flex items-center gap-3">
 								Saiba mais <ArrowRight size={20} />
 							</Link>
 						</Button>

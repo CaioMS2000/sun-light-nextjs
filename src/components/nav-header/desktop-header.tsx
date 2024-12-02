@@ -44,18 +44,29 @@ export default function DesktopNavHeader({
 					</div>
 				</Link>
 				<div className="flex items-center gap-6 text-lg">
-					<Link href={'/'}>Página inicial</Link>
-					<Link href={'/about-us'}>Sobre nós</Link>
-					<Link href={'/solar-energy'}>Energia Solar</Link>
-					<Link href={'/projects'}>Projetos</Link>
+					<Link href={'/'} className="hover:text-sun-light-yellow">
+						Página inicial
+					</Link>
+					<Link href={'/about-us'} className="hover:text-sun-light-yellow">
+						Sobre nós
+					</Link>
+					<Link href={'/solar-energy'} className="hover:text-sun-light-yellow">
+						Energia Solar
+					</Link>
+					<Link href={'/projects'} className="hover:text-sun-light-yellow">
+						Projetos
+					</Link>
 					<Link
 						href={'/contact'}
-						className={cn('rounded-full px-5 py-2 text-white', {
-							'bg-accent-100': contactButton.color === 'dark',
-							'bg-dark-grey': contactButton.color === 'light',
-							'bg-opacity-30': contactButton.background === 'semi-transparent',
-							'bg-opacity-100': contactButton.background === 'solid',
-						})}
+						className={cn(
+							'rounded-full px-5 py-2 text-white hover:text-sun-light-yellow',
+							{
+								'bg-accent-100': contactButton.color === 'dark',
+								'bg-dark-grey': contactButton.color === 'light',
+								'bg-opacity-30': contactButton.background === 'semi-transparent',
+								'bg-opacity-100': contactButton.background === 'solid',
+							}
+						)}
 					>
 						Contato
 					</Link>

@@ -56,22 +56,40 @@ export default function MobileNavHeader({
 
 				{isMenuOpen && (
 					<div className="mt-4 flex flex-col gap-4 py-3 pl-5 text-lg">
-						<Link className="underline underline-offset-2" href={'/'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/'}
+						>
 							Página inicial
 						</Link>
-						<Link className="underline underline-offset-2" href={'/about-us'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/about-us'}
+						>
 							Sobre nós
 						</Link>
-						<Link className="underline underline-offset-2" href={'/solar-energy'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/solar-energy'}
+						>
 							Energia Solar
 						</Link>
-						<Link className="underline underline-offset-2" href={'/projects'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/projects'}
+						>
 							Projetos
 						</Link>
-						<Link className="underline underline-offset-2" href={'/contact'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/contact'}
+						>
 							Contato
 						</Link>
-						<Link className="underline underline-offset-2" href={'/admin'}>
+						<Link
+							className="underline underline-offset-2 focus:text-sun-light-yellow"
+							href={'/admin'}
+						>
 							Administrador
 						</Link>
 					</div>

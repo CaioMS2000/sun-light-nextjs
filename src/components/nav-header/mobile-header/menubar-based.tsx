@@ -59,37 +59,52 @@ export default function MobileNavHeader2({
 							</MenubarTrigger>
 							<MenubarContent>
 								<MenubarItem>
-									<Link className="underline underline-offset-2" href={'/'}>
+									<Link
+										className="underline underline-offset-2 active:text-sun-light-yellow"
+										href={'/'}
+									>
 										Página inicial
 									</Link>
 								</MenubarItem>
 								<MenubarSeparator />
 								<MenubarItem>
-									<Link className="underline underline-offset-2" href={'/about-us'}>
+									<Link
+										className="underline underline-offset-2 active:text-sun-light-yellow"
+										href={'/about-us'}
+									>
 										Sobre nós
 									</Link>
 								</MenubarItem>
 								<MenubarSeparator />
 								<MenubarItem>
-									<Link className="underline underline-offset-2" href={'/solar-energy'}>
+									<Link
+										className="underline underline-offset-2 active:text-sun-light-yellow"
+										href={'/solar-energy'}
+									>
 										Energia Solar
 									</Link>
 								</MenubarItem>
 								<MenubarSeparator />
 								<MenubarItem>
-									<Link className="underline underline-offset-2" href={'/projects'}>
+									<Link
+										className="underline underline-offset-2 active:text-sun-light-yellow"
+										href={'/projects'}
+									>
 										Projetos
 									</Link>
 								</MenubarItem>
 								<MenubarSeparator />
 								<MenubarItem>
-									<Link className="underline underline-offset-2" href={'/contact'}>
+									<Link
+										className="underline underline-offset-2 active:text-sun-light-yellow"
+										href={'/contact'}
+									>
 										Contato
 									</Link>
 								</MenubarItem>
 								<MenubarItem>
 									<Link
-										className="text-zinc-400 underline underline-offset-2"
+										className="text-zinc-400 underline underline-offset-2 active:text-sun-light-yellow"
 										href={'/admin'}
 									>
 										Administrador
