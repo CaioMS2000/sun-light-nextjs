@@ -7,10 +7,12 @@ import {
 	CircleUser,
 	ImageIcon,
 	MapPinHouse,
+	Pencil,
 } from 'lucide-react'
 import { SUBDOMAINBUCKETURL } from '@/constants/cloud'
 import ImageComponent from './image-component'
 import Slider from './slider'
+import Link from 'next/link'
 
 interface ProjectBoxProps extends Project {}
 
@@ -27,10 +29,15 @@ export default function ProjectBox({
 		<>
 			<div className="mx-auto w-96 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1)] md:w-[700px] lg:w-[700px]">
 				<div className="flex flex-col gap-3">
-					<span className="inline-flex items-center gap-3">
-						<CircleUser />
-						{name}
-					</span>
+					<div className="flex justify-between">
+						<span className="inline-flex items-center gap-3">
+							<CircleUser />
+							{name}
+						</span>
+						<Link href={`/admin/edit-project/${id}`}>
+							<Pencil />
+						</Link>
+					</div>
 					<span className="inline-flex items-center gap-3">
 						<MapPinHouse />
 						{address}

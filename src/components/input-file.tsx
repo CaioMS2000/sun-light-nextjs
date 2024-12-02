@@ -1,5 +1,5 @@
 import { CloudUpload, FileIcon } from 'lucide-react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import {
 	Controller,
 	Control,
@@ -11,7 +11,7 @@ import {
 interface FileInputProps {
 	name: string
 	control: Control<any>
-	label?: string
+	label?: ReactNode
 	error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
 }
 
@@ -57,7 +57,7 @@ export function FileInput({ name, control, label, error }: FileInputProps) {
 									<FileIcon className="size-4" />
 								</>
 							) : (
-								<span>{label}</span>
+								<>{label}</>
 							)}
 						</div>
 					)}

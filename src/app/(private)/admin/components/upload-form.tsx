@@ -8,12 +8,11 @@ import { Button } from '@/components/ui/button'
 import FormError from '@/components/form-error'
 import { Label } from '@/components/ui/label'
 import FormField from '@/components/formField'
-import { FileInput } from './input-file'
+import { FileInput } from '@/components/input-file'
 import { BookmarkPlus, LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { queryClient } from '@/lib/react-query'
 import { ProjectsQueryCache } from '@/@types/project'
-import { useMutation, useQuery } from '@tanstack/react-query'
 
 const uploadSchema = z.object({
 	files: z
