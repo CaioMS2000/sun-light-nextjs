@@ -9,10 +9,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 	try {
 		const _params = await params
 		const { id } = _params
-		const urlObject = new URL(req.url)
 		const { project } = await getProject(+id)
-
-		console.log(id)
 
 		return NextResponse.json(
 			{

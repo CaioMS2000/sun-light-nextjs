@@ -70,7 +70,7 @@ export async function PUT(req: NextRequest) {
 		const data = await parseForm(req)
 		const { files: formFiles, fields } = data
 		const { files } = formFiles
-		console.log(data)
+
 		if (!files || files.length === 0) {
 			return NextResponse.json({ error: 'No files uploaded' }, { status: 400 })
 		}
@@ -109,9 +109,6 @@ export async function PUT(req: NextRequest) {
 
 		const allImages = [...imageURLs, ...project.imageURLs]
 
-		console.log(allImages)
-		console.log(allImages.length)
-
 		await prisma.project.update({
 			where: {
 				id: project.id,
@@ -124,8 +121,6 @@ export async function PUT(req: NextRequest) {
 		return NextResponse.json(
 			{
 				message: 'Upload concluído com sucesso',
-				// files: uploadResults,
-				// project: newProject,
 			},
 			{ status: 200 }
 		)

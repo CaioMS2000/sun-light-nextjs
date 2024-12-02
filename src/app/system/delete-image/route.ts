@@ -7,7 +7,6 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function DELETE(req: NextRequest) {
 	try {
 		const data = await req.json()
-		console.log(data)
 
 		await deleteImage(data.image, Number(data.projectId))
 
@@ -18,7 +17,6 @@ export async function DELETE(req: NextRequest) {
 
 		const res = await awsClient.send(delCommand)
 
-		console.log(res)
 		return NextResponse.json({}, { status: 200 })
 	} catch (error) {
 		console.log(error)
