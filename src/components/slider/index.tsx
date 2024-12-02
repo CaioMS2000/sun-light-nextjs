@@ -91,8 +91,8 @@ export default function Slider({
 					modules={[Navigation, Pagination, A11y, Autoplay]}
 					onSlideChange={e => {
 						if (log) {
-							console.clear()
-							console.log(e.activeIndex)
+							// console.clear()
+							// console.log(e.activeIndex)
 						}
 					}}
 					{...activeSettings}

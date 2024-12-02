@@ -13,8 +13,11 @@ import { SUBDOMAINBUCKETURL } from '@/constants/cloud'
 import ImageComponent from './image-component'
 import Slider from './slider'
 import Link from 'next/link'
+import EditProjectButton from './edit-project-button'
 
-interface ProjectBoxProps extends Project {}
+interface ProjectBoxProps extends Project {
+	isAdmin?: boolean
+}
 
 export default function ProjectBox({
 	id,
@@ -22,8 +25,8 @@ export default function ProjectBox({
 	address,
 	potency,
 	estimation,
-	pj,
 	imageURLs,
+	isAdmin,
 }: ProjectBoxProps) {
 	return (
 		<>
@@ -34,9 +37,9 @@ export default function ProjectBox({
 							<CircleUser />
 							{name}
 						</span>
-						<Link href={`/admin/edit-project/${id}`}>
+						<EditProjectButton projectId={id} isAdmin={isAdmin}>
 							<Pencil />
-						</Link>
+						</EditProjectButton>
 					</div>
 					<span className="inline-flex items-center gap-3">
 						<MapPinHouse />

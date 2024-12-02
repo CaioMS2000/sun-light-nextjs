@@ -6,12 +6,13 @@ export async function GET(req: NextRequest) {
 		const urlObject = new URL(req.url)
 		const { searchParams } = urlObject
 		const page = searchParams.get('page')
+		const order = searchParams.get('order')
 
 		if (!page) {
 			return NextResponse.json({ error: 'Page not provided' }, { status: 404 })
 		}
 
-		const { projects, meta } = await getProjects(+page)
+		const { projects, meta } = await getProjects({ page: +page, order })
 
 		return NextResponse.json(
 			{
