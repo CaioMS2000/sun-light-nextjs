@@ -42,7 +42,7 @@ export async function getProjects({ page, order }: GetProjectsParams) {
 
 		return { projects, meta: { page, perPage: AMOUNT_PER_REQUEST, totalCount } }
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 	}
 	return {
 		projects: [],

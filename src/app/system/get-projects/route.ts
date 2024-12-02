@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 			return NextResponse.json({ error: 'Page not provided' }, { status: 404 })
 		}
 
-		const { projects, meta } = await getProjects({ page: +page, order })
+		const { projects, meta } = await getProjects({ page: Number(page), order })
 
 		return NextResponse.json(
 			{
@@ -22,6 +22,7 @@ export async function GET(req: NextRequest) {
 			{ status: 200 }
 		)
 	} catch (error) {
+		console.error(error)
 		return NextResponse.json({ error: 'Some error occurred' }, { status: 500 })
 	}
 }
