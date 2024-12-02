@@ -43,7 +43,6 @@ export default function ImageContainer({
 
 				toast.success('Imagem deletada com sucesso')
 			} catch (error) {
-				console.error('Error deleting image:', error)
 				toast.error('Erro ao deletar imagem')
 			}
 		},
