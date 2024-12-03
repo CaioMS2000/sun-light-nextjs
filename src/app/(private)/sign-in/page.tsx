@@ -61,7 +61,6 @@ function SignIn() {
 			}
 
 			if (response.redirected && response.url) {
-				await new Promise(resolve => setTimeout(resolve, 500))
 				router.push(response.url)
 			}
 		} catch (error) {

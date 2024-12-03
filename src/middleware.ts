@@ -14,8 +14,6 @@ export async function middleware(request: NextRequest) {
 				status: 303,
 			})
 
-			response.headers.set('Cache-Control', 'no-store')
-
 			return response
 		}
 }
