@@ -14,7 +14,7 @@ export default function Admin() {
 			<UploadForm />
 			<Separator />
 			<Suspense fallback={<LoadingComponent />}>
-				<ProjectsArea />
+				<ProjectsArea isAdmin />
 			</Suspense>
 			<div id="white-space" className="h-14 bg-transparent"></div>
 		</>
