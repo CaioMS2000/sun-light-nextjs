@@ -9,10 +9,15 @@ export async function middleware(request: NextRequest) {
 	const usernameCookie = cookieStore.get(USERNAME_COOKIE)
 
 	if (env.SECURITY_MIDDLEWARE_ENABLED === 'true')
-		if (!usernameCookie)
-			return NextResponse.redirect(new URL('/sign-in', request.url), {
+		if (!usernameCookie) {
+			const response = NextResponse.redirect(new URL('/sign-in', request.url), {
 				status: 303,
 			})
+
+			response.headers.set('Cache-Control', 'no-store')
+
+			return response
+		}
 }
 
 export const config = {
