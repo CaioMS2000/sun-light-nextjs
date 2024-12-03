@@ -61,7 +61,8 @@ function SignIn() {
 			}
 
 			if (response.redirected && response.url) {
-				router.push(response.url)
+				window.location.href = response.url
+				//router.push is triggering a GET request to the target route but not properly redirecting the user to the target route
 			}
 		} catch (error) {
 			toast.error(
