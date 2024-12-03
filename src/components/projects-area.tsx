@@ -15,6 +15,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import { useEffect } from 'react'
 
 interface ProjectsAreaProps {
 	isAdmin?: boolean
@@ -36,11 +37,6 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 		.nullable()
 		.transform(val => val || 'pot-desc')
 		.parse(urlOrderState)
-
-	if (!urlOrderState) {
-		params.set('order', order)
-		router.push(`${pathname}?${params.toString()}`)
-	}
 
 	const { data: projectData, isLoading } = useQuery({
 		queryKey: ['projects', pageIndex, order],
@@ -66,6 +62,13 @@ export default function ProjectsArea({ isAdmin = false }: ProjectsAreaProps) {
 		}
 		router.push(`${pathname}?${params.toString()}`)
 	}
+
+	useEffect(() => {
+		if (!urlOrderState) {
+			params.set('order', order)
+			router.push(`${pathname}?${params.toString()}`)
+		}
+	}, [router, params, pathname, urlOrderState, order])
 
 	return (
 		<>
