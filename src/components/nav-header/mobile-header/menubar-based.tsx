@@ -53,9 +53,9 @@ export default function MobileNavHeader2({
 					</Link>
 					<Menubar className="border-0 bg-transparent" onClick={handleClick}>
 						<MenubarMenu>
-							<MenubarTrigger className="border-2 border-accent-100">
+							<MenubarTrigger className="border-2 border-white">
 								{isMenuOpen && <XIcon />}
-								{!isMenuOpen && <AlignJustify />}
+								{!isMenuOpen && <AlignJustify className="text-white" />}
 							</MenubarTrigger>
 							<MenubarContent>
 								<MenubarItem>

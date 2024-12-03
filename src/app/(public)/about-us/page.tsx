@@ -1,4 +1,3 @@
-import NavHeader from '@/components/nav-header'
 import Image from 'next/image'
 import HeaderComponent from './components/header'
 

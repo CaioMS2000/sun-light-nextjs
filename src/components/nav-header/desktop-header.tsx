@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import IconComponent from './icon-component'
 
 interface ContactButtonProps {
 	background?: 'semi-transparent' | 'solid'
@@ -16,6 +17,9 @@ export default function DesktopNavHeader({
 	className,
 	...props
 }: NavHeaderProps) {
+	console.log(className)
+	console.log(className?.includes('bg-accent'))
+	const bgIsDark = className?.includes('bg-accent')
 	return (
 		<>
 			<nav
@@ -26,22 +30,7 @@ export default function DesktopNavHeader({
 				)}
 			>
 				<Link href={'/'}>
-					<div className="grid grid-cols-[auto,1fr] gap-2">
-						<Image
-							src={'/images/logo_icon_alpha_sm.png'}
-							alt=""
-							// width={50}
-							// height={50}
-							width="0"
-							height="0"
-							sizes="100px"
-							className="w-12 lg:w-16"
-						/>
-						<div className="flex flex-col justify-center">
-							<p className="font-semibold text-sun-light-blue">Sun Light</p>
-							<p className="text-dark-grey">Engenharia do Sol</p>
-						</div>
-					</div>
+					<IconComponent className={className} />
 				</Link>
 				<div className="flex items-center gap-6 text-lg">
 					<Link href={'/'} className="hover:text-sun-light-yellow">
