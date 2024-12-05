@@ -3,7 +3,7 @@
         "src/app/system/get-projects/route.ts":{
             "maxDuration": 60
         },
-        "src/app/system/create-project/route.ts":{
+        "src/app/actions.ts":{
             "maxDuration": 60
         }
     }
