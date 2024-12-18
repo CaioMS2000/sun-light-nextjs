@@ -6,7 +6,8 @@ interface IconComponentProps {
 }
 
 const IconComponent = ({ className }: IconComponentProps) => {
-	const bgIsDark = className?.includes('bg-accent')
+	const bgIsDark =
+		className?.includes('bg-accent') || className?.includes('bg-black')
 	if (bgIsDark) {
 		return (
 			<>
