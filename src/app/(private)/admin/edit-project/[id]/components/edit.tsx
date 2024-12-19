@@ -23,6 +23,9 @@ import { FileInput } from '@/components/input-file'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { queryClient } from '@/lib/react-query'
+import FormField from '@/components/formField'
+import { Input } from '@/components/ui/input'
+import FormError from '@/components/form-error'
 
 const uploadSchema = z.object({
 	files: z
@@ -56,6 +59,16 @@ const uploadSchema = z.object({
 
 type FormData = z.infer<typeof uploadSchema>
 
+const editSchema = z.object({
+	id: z.string().min(1, { message: 'O ID é obrigatório.' }),
+	name: z.string().optional(),
+	address: z.string().optional(),
+	potency: z.string().optional(),
+	estimation: z.string().optional(),
+})
+
+type EditData = z.infer<typeof editSchema>
+
 interface EditProps {
 	projectId: string
 }
@@ -72,15 +85,39 @@ export default function Edit({ projectId }: EditProps) {
 		staleTime: 1000 * 60 * 60 * 24,
 	})
 	const {
-		reset,
-		handleSubmit,
-		control,
-		formState: { errors, isSubmitting, isSubmitSuccessful },
+		reset: resetUpload,
+		handleSubmit: handleSubmitUpload,
+		control: controlUploadForm,
+		formState: { errors: uploadFormErrors, isSubmitting: isSubmittingUpload },
 	} = useForm<FormData>({
 		resolver: zodResolver(uploadSchema),
 	})
+	const {
+		reset: resetEdit,
+		handleSubmit: handleSubmitEdit,
+		control: controlEditForm,
+		register: registerEditForm,
+		formState: {
+			errors: editFormErrors,
+			isSubmitting: isSubmittingEdit,
+			touchedFields,
+		},
+	} = useForm<EditData>({
+		resolver: zodResolver(editSchema),
+		defaultValues: {
+			id: projectId,
+			name: projectData?.project.name || '',
+			address: projectData?.project.address || '',
+			potency: projectData?.project.potency
+				? String(projectData.project.potency)
+				: '',
+			estimation: projectData?.project.estimation
+				? String(projectData.project.estimation)
+				: '',
+		},
+	})
 
-	const onSubmit: SubmitHandler<FormData> = async data => {
+	const onSubmitUpload: SubmitHandler<FormData> = async data => {
 		const formData = new FormData()
 
 		Array.from(data.files).forEach(file => {
@@ -101,9 +138,42 @@ export default function Edit({ projectId }: EditProps) {
 
 			queryClient.invalidateQueries({ queryKey: ['project', projectId] })
 			toast.success('Upload concluído')
-			reset()
+			resetUpload()
 		} catch (error) {
 			toast.error(`Erro no upload: ${error}`)
+		}
+	}
+
+	const onSubmitEdit: SubmitHandler<EditData> = async data => {
+		if (!Object.keys(touchedFields).length) {
+			toast.error('Nenhuma alteração foi feita')
+			return
+		}
+		const updatedData = {
+			id: projectId,
+			name: data.name || projectData?.project.name,
+			address: data.address || projectData?.project.address,
+			potency: data.potency || projectData?.project.potency,
+			estimation: data.estimation || projectData?.project.estimation,
+		}
+
+		try {
+			const response = await fetch('/system/edit-project', {
+				method: 'PUT',
+				body: JSON.stringify(updatedData),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`)
+			}
+
+			queryClient.invalidateQueries({ queryKey: ['project', projectId] })
+			toast.success('Edição concluída')
+		} catch (error) {
+			toast.error(`Erro na edição: ${error}`)
 		}
 	}
 
@@ -129,33 +199,81 @@ export default function Edit({ projectId }: EditProps) {
 			</Link>
 
 			<div className="px-3 md:text-xl">
-				<div className="flex flex-col gap-3 md:flex-row md:gap-10">
-					<div className="flex flex-col gap-3">
-						<span className="inline-flex items-center gap-3 font-semibold">
-							<CircleUser />
-							{projectData.project.name}
-						</span>
-						<span className="inline-flex items-center gap-3 font-semibold">
-							<MapPinHouse />
-							{projectData.project.address}
-						</span>
+				<form onSubmit={handleSubmitEdit(onSubmitEdit)}>
+					<div className="flex flex-col gap-3 md:flex-row md:gap-10">
+						<div className="flex flex-col gap-3">
+							<div className="inline-flex items-center gap-3 font-semibold">
+								<CircleUser />
+								<FormField>
+									<Input
+										type="text"
+										{...registerEditForm('name')}
+										className="w-auto"
+										placeholder={`${projectData.project.name}`}
+									/>
+									{editFormErrors.name && (
+										<FormError>{editFormErrors.name.message}</FormError>
+									)}
+								</FormField>
+							</div>
+							<div className="inline-flex items-center gap-3 font-semibold">
+								<MapPinHouse />
+								<FormField>
+									<Input
+										type="text"
+										{...registerEditForm('address')}
+										className="w-auto"
+										placeholder={`${projectData.project.address}`}
+									/>
+									{editFormErrors.address && (
+										<FormError>{editFormErrors.address.message}</FormError>
+									)}
+								</FormField>
+							</div>
+						</div>
+						<div className="flex flex-col gap-3">
+							<div className="inline-flex items-center gap-3">
+								<BatteryCharging />
+								<span>
+									<FormField>
+										<Input
+											type="text"
+											{...registerEditForm('potency')}
+											className="w-auto"
+											placeholder={`${projectData.project.potency ? projectData.project.potency : ''} (kWp)`}
+										/>
+										{editFormErrors.potency && (
+											<FormError>{editFormErrors.potency.message}</FormError>
+										)}
+									</FormField>
+								</span>
+							</div>
+							<div className="inline-flex items-center gap-3">
+								<ChartNoAxesCombined />
+								<span>
+									<FormField>
+										<Input
+											type="text"
+											{...registerEditForm('estimation')}
+											className="w-auto"
+											placeholder={`${projectData.project.estimation ? projectData.project.estimation : ''} (kWh/mês)`}
+										/>
+										{editFormErrors.estimation && (
+											<FormError>{editFormErrors.estimation.message}</FormError>
+										)}
+									</FormField>
+								</span>
+							</div>
+						</div>
 					</div>
-					<div className="flex flex-col gap-3">
-						<p className="inline-flex items-center gap-3">
-							<BatteryCharging />
-							<span>
-								<strong>Potência:</strong> {projectData.project.potency} kWp
-							</span>
-						</p>
-						<p className="inline-flex items-center gap-3">
-							<ChartNoAxesCombined />
-							<span>
-								<strong>Produção estimada:</strong> {projectData.project.estimation}{' '}
-								kWh/mês
-							</span>
-						</p>
-					</div>
-				</div>
+					<Button
+						className="mt-5"
+						type="submit"
+						disabled={!Object.keys(touchedFields).length}
+					>
+						Salvar
+					</Button>
+				</form>
 
 				<p className="mt-10 inline-flex items-center gap-3 text-lg">
 					<ImageIcon />
@@ -165,23 +283,23 @@ export default function Edit({ projectId }: EditProps) {
 				</p>
 
 				<form
-					onSubmit={handleSubmit(onSubmit)}
+					onSubmit={handleSubmitUpload(onSubmitUpload)}
 					className="my-3 flex items-center gap-3"
 				>
 					<FileInput
 						name="files"
-						control={control}
+						control={controlUploadForm}
 						label={<span className="text-sm">Adicionar imagens</span>}
-						error={errors.files as FieldError | undefined}
+						error={uploadFormErrors.files as FieldError | undefined}
 					/>
 
 					<button
 						type="submit"
 						className="flex rounded-lg bg-sun-light-blue p-2 text-white"
-						disabled={isSubmitting}
+						disabled={isSubmittingUpload}
 					>
-						{!isSubmitting && <span className="text-sm">Enviar</span>}
-						{isSubmitting && (
+						{!isSubmittingUpload && <span className="text-sm">Enviar</span>}
+						{isSubmittingUpload && (
 							<span className="inline-flex items-center gap-2">
 								<LoaderCircle className="animate-spin cursor-not-allowed" />
 								<span className="text-sm">Enviar</span>
