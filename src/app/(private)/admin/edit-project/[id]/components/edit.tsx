@@ -26,6 +26,7 @@ import { queryClient } from '@/lib/react-query'
 import FormField from '@/components/formField'
 import { Input } from '@/components/ui/input'
 import FormError from '@/components/form-error'
+import { useState } from 'react'
 
 const uploadSchema = z.object({
 	files: z
@@ -74,6 +75,7 @@ interface EditProps {
 }
 
 export default function Edit({ projectId }: EditProps) {
+	const [someInputChanged, setSomeInputChanged] = useState(false)
 	const { data: projectData, isLoading } = useQuery({
 		queryKey: ['project', projectId],
 		queryFn: async () => {
@@ -177,6 +179,15 @@ export default function Edit({ projectId }: EditProps) {
 		}
 	}
 
+	const handleInputChange = () => {
+		// This will trigger the form state update on input change
+		console.log('Input changed')
+		if (someInputChanged === false) {
+			console.log('set true')
+			setSomeInputChanged(true)
+		}
+	}
+
 	if (isLoading || !projectData) return <EditSkeleton />
 
 	return (
@@ -210,6 +221,7 @@ export default function Edit({ projectId }: EditProps) {
 										{...registerEditForm('name')}
 										className="w-auto"
 										placeholder={`${projectData.project.name}`}
+										onChange={handleInputChange}
 									/>
 									{editFormErrors.name && (
 										<FormError>{editFormErrors.name.message}</FormError>
@@ -224,6 +236,7 @@ export default function Edit({ projectId }: EditProps) {
 										{...registerEditForm('address')}
 										className="w-auto"
 										placeholder={`${projectData.project.address}`}
+										onChange={handleInputChange}
 									/>
 									{editFormErrors.address && (
 										<FormError>{editFormErrors.address.message}</FormError>
@@ -241,6 +254,7 @@ export default function Edit({ projectId }: EditProps) {
 											{...registerEditForm('potency')}
 											className="w-auto"
 											placeholder={`${projectData.project.potency ? projectData.project.potency : ''} (kWp)`}
+											onChange={handleInputChange}
 										/>
 										{editFormErrors.potency && (
 											<FormError>{editFormErrors.potency.message}</FormError>
@@ -257,6 +271,7 @@ export default function Edit({ projectId }: EditProps) {
 											{...registerEditForm('estimation')}
 											className="w-auto"
 											placeholder={`${projectData.project.estimation ? projectData.project.estimation : ''} (kWh/mês)`}
+											onChange={handleInputChange}
 										/>
 										{editFormErrors.estimation && (
 											<FormError>{editFormErrors.estimation.message}</FormError>
@@ -269,7 +284,7 @@ export default function Edit({ projectId }: EditProps) {
 					<Button
 						className="mt-5"
 						type="submit"
-						disabled={!Object.keys(touchedFields).length}
+						disabled={!Object.keys(touchedFields).length && !someInputChanged}
 					>
 						Salvar
 					</Button>
