@@ -11,15 +11,12 @@ export async function PUT(request: NextRequest) {
 			name,
 			potency: Number(potency),
 		}
-		console.log(pre)
 		const updated = await prisma.project.update({
 			where: {
 				id: Number(id),
 			},
 			data: { ...pre },
 		})
-
-		console.log(updated)
 
 		revalidatePath('/projects')
 		revalidatePath('/admin')
@@ -31,6 +28,7 @@ export async function PUT(request: NextRequest) {
 			{ status: 200 }
 		)
 	} catch (error) {
+		// @ts-ignore
 		console.log(error.stack)
 		console.log('\n\n\n\n')
 		console.log(error)

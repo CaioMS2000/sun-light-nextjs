@@ -180,10 +180,7 @@ export default function Edit({ projectId }: EditProps) {
 	}
 
 	const handleInputChange = () => {
-		// This will trigger the form state update on input change
-		console.log('Input changed')
 		if (someInputChanged === false) {
-			console.log('set true')
 			setSomeInputChanged(true)
 		}
 	}
@@ -282,11 +279,18 @@ export default function Edit({ projectId }: EditProps) {
 						</div>
 					</div>
 					<Button
-						className="mt-5"
+						className="mt-5 bg-sun-light-blue"
 						type="submit"
 						disabled={!Object.keys(touchedFields).length && !someInputChanged}
 					>
-						Salvar
+						{isSubmittingEdit ? (
+							<span className="inline-flex items-center gap-2">
+								<LoaderCircle className="animate-spin cursor-not-allowed" />
+								<span className="text-sm">Salvar</span>
+							</span>
+						) : (
+							<span className="text-sm">Salvar</span>
+						)}
 					</Button>
 				</form>
 

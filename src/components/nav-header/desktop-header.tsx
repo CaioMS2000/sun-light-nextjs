@@ -17,8 +17,6 @@ export default function DesktopNavHeader({
 	className,
 	...props
 }: NavHeaderProps) {
-	console.log(className)
-	console.log(className?.includes('bg-accent'))
 	const bgIsDark = className?.includes('bg-accent')
 	return (
 		<>
