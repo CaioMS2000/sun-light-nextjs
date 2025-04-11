@@ -11,7 +11,10 @@ interface RegisterParams {
 export async function register({ password, username, name }: RegisterParams) {
 	const restrictionOptions = env.NEXT_PUBLIC_USER_RESTRICTIONS.split(',')
 
-	if (!restrictionOptions.includes(name.toLocaleLowerCase()))
+	if (
+		restrictionOptions.length > 0 &&
+		!restrictionOptions.includes(name.toLocaleLowerCase())
+	)
 		throw new Error('You are not allowed to register')
 
 	const userWithSameUsername = await prisma.user.findUnique({

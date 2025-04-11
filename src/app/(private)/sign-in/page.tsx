@@ -85,7 +85,7 @@ function SignIn() {
 			>
 				Página inicial
 			</Link>
-			<div className="mx-auto flex h-screen w-screen max-w-[1500px] items-center justify-center bg-zinc-900 font-catamaran text-lg">
+			<div className="mx-auto flex h-screen w-screen items-center justify-center bg-zinc-900 font-catamaran text-lg">
 				<Card className="w-64 border-transparent bg-zinc-800 md:w-96">
 					<CardHeader>
 						<CardTitle className="flex justify-center">
